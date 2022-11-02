@@ -24,6 +24,7 @@ namespace pryBazanIEFI
     public partial class frmClientesActividad : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        int[] total = new int[100];
 
         public frmClientesActividad()
         {
@@ -56,10 +57,13 @@ namespace pryBazanIEFI
 
         private void btnListar_Click(object sender, EventArgs e)
         {
-            lblMayor.Text = "";
+            
             string actividad = lstActividad.Text;
             string codActividad;
             
+            string promedio;
+            
+
 
             OleDbConnection conexion = new OleDbConnection(ruta);
             conexion.Open();
@@ -129,14 +133,44 @@ namespace pryBazanIEFI
             }
 
 
-            //Sacar Promedio
-            
-
 
 
 
 
             //Total saldos
+            int[] vecSaldo = new int[100];
+            int indice = 0;
+            
+
+            string selectSaldo = "SELECT Saldo FROM Socio WHERE Codigo_Actividad=" + codActividad;
+            OleDbCommand cmdSaldo = new OleDbCommand(selectSaldo, conexion);
+            OleDbDataAdapter daSaldo = new OleDbDataAdapter(cmdSaldo);
+            
+            OleDbDataReader objLector = cmdSaldo.ExecuteReader();
+            while (objLector.Read())
+            {
+                vecSaldo[indice] =Convert.ToInt32(objLector[0]);
+                indice++;
+            }
+
+            int suma = vecSaldo.Sum();
+            lblTotal.Text = suma.ToString();
+
+
+
+
+
+
+            //Sacar Promedio
+            int total = Convert.ToInt32(lblTotal.Text);
+            int cantidadRegistros = dgvClientes.Rows.Count;
+
+
+            promedio = Convert.ToString(total / cantidadRegistros);
+            lblPromedio.Text = promedio;
+
+
+
 
 
             conexion.Close();
