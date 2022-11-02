@@ -52,3 +52,7 @@ C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csp
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csproj.CoreCompileInputs.cache
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.exe
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.pdb
+C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\bin\Debug\itextsharp.dll
+C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\bin\Debug\itextsharp.xml
+C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csproj.CopyComplete

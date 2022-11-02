@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.lblMenu = new System.Windows.Forms.Label();
             this.lblActividad = new System.Windows.Forms.Label();
             this.lstActividad = new System.Windows.Forms.ComboBox();
@@ -45,11 +46,10 @@
             this.lblPromedio = new System.Windows.Forms.Label();
             this.lblMenor = new System.Windows.Forms.Label();
             this.lblTotalSaldo = new System.Windows.Forms.Label();
-            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.gbEtiquetas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -61,6 +61,17 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(726, 51);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(580, 16);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
             // 
             // lblMenu
             // 
@@ -91,9 +102,12 @@
             // 
             // dgvClientes
             // 
+            this.dgvClientes.AllowUserToAddRows = false;
+            this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Location = new System.Drawing.Point(16, 109);
             this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.RowTemplate.Height = 24;
             this.dgvClientes.Size = new System.Drawing.Size(434, 187);
@@ -152,6 +166,7 @@
             this.btnImprimir.TabIndex = 10;
             this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // btnExportar
             // 
@@ -161,6 +176,7 @@
             this.btnExportar.TabIndex = 11;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // gbEtiquetas
             // 
@@ -212,17 +228,6 @@
             this.lblTotalSaldo.TabIndex = 10;
             this.lblTotalSaldo.Text = "Total Saldo";
             // 
-            // picCerrar
-            // 
-            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
-            this.picCerrar.Location = new System.Drawing.Point(580, 16);
-            this.picCerrar.Name = "picCerrar";
-            this.picCerrar.Size = new System.Drawing.Size(30, 22);
-            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCerrar.TabIndex = 2;
-            this.picCerrar.TabStop = false;
-            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
-            // 
             // frmClientesActividad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -242,10 +247,10 @@
             this.Load += new System.EventHandler(this.frmClientesActividad_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.gbEtiquetas.ResumeLayout(false);
             this.gbEtiquetas.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
