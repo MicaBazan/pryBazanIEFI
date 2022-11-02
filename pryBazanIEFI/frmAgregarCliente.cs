@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace pryBazanIEFI
 {
@@ -21,6 +22,10 @@ namespace pryBazanIEFI
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
+            string barrio = lstBarrio.Text;
+            string codigo = txtDni.Text;
+            string actividad = lstActividad.Text;
+
             OleDbConnection conexion = new OleDbConnection(ruta);
             conexion.Open();
 
@@ -29,26 +34,70 @@ namespace pryBazanIEFI
 
             OleDbCommand cmd = new OleDbCommand(insert, conexion);
 
-            if()
-            {
+         
+            cmd.Parameters.AddWithValue("@Dni", txtDni.Text);
+            cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text);
+            cmd.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
 
+
+
+
+
+
+            //Busca el codigo de barrio
+            string selectBarrio = "SELECT * FROM Tabla_Barrio WHERE Nombre_Barrio='" + barrio + "'";
+
+            OleDbDataAdapter adapterBarrio = new OleDbDataAdapter(selectBarrio, conexion);
+
+            DataSet dtBarrio = new DataSet();
+
+            adapterBarrio.Fill(dtBarrio);
+
+
+            if (dtBarrio.Tables[0].Rows.Count == 0)
+            {
+                dtBarrio.Dispose();
+                return;
             }
             else
             {
-                cmd.Parameters.AddWithValue("@Dni", txtDni.Text);
-                cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-                cmd.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
-                cmd.Parameters.AddWithValue("@Barrio", lstBarrio.Text);
-                cmd.Parameters.AddWithValue("@Actividad", lstActividad.Text);
-                cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
-
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Socio registrado", "Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                limpiar();
+                cmd.Parameters.AddWithValue("@Barrio", (dtBarrio.Tables[0].Rows[0]["Codigo_Barrio"].ToString()));
+                dtBarrio.Dispose();
             }
+
+
+
+            //Busca el código de actividad
+            string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
+
+            OleDbDataAdapter adapterActividad = new OleDbDataAdapter(selectactividad, conexion);
+
+            DataSet dtActividad = new DataSet();
+
+            adapterActividad.Fill(dtActividad);
+
+            if (dtActividad.Tables[0].Rows.Count == 0)
+            {
+                dtActividad.Dispose();
+                return;
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@Actividad", (dtActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString()));
+            }
+
+
+
+            cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
+
+            cmd.ExecuteNonQuery();
+
+            MessageBox.Show("Socio registrado", "Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            limpiar();
           
-            conexion.Close(); 
+            conexion.Close();
+            
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -99,6 +148,64 @@ namespace pryBazanIEFI
         private void frmAgregarCliente_Load(object sender, EventArgs e)
         {
             agregarListas();
+            interfazInicial();
+        }
+
+
+        private void interfazInicial()
+        {
+            txtDni.Text = "";
+            txtNombre.Text = "";
+            txtDireccion.Text = "";
+            lstBarrio.Text = "";
+            lstActividad.Text = "";
+            txtSaldo.Text = "";
+
+            txtDni.Focus();
+        }
+
+
+        private void validar()
+        {
+            if (txtDni.Text != string.Empty && txtNombre.Text != string.Empty && txtDireccion.Text != string.Empty && txtSaldo.Text !=
+                string.Empty && lstActividad.Text != string.Empty && lstBarrio.Text != string.Empty)
+            {
+                btnCargar.Enabled = true;
+            }
+            else
+            {
+                btnCargar.Enabled = false;
+            }
+        }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+            validar();
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            validar();
+        }
+
+        private void txtDireccion_TextChanged(object sender, EventArgs e)
+        {
+            validar();
+        }
+
+        private void lstBarrio_TextChanged(object sender, EventArgs e)
+        {
+            validar();
+        }
+
+        private void lstActividad_TextChanged(object sender, EventArgs e)
+        {
+            validar();
+        }
+
+        private void txtSaldo_TextChanged(object sender, EventArgs e)
+        {
+            validar();
         }
     }
 }

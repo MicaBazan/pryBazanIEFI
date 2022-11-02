@@ -39,14 +39,17 @@
             this.lblCantidadDeClientes = new System.Windows.Forms.Label();
             this.lblTotaldeSaldos = new System.Windows.Forms.Label();
             this.dgvDuedas = new System.Windows.Forms.DataGridView();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
             this.gbConsulta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDuedas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblListado);
             this.pnlMenu.Location = new System.Drawing.Point(-18, -14);
             this.pnlMenu.Name = "pnlMenu";
@@ -75,7 +78,7 @@
             this.gbConsulta.Controls.Add(this.dgvDuedas);
             this.gbConsulta.Location = new System.Drawing.Point(16, 65);
             this.gbConsulta.Name = "gbConsulta";
-            this.gbConsulta.Size = new System.Drawing.Size(719, 455);
+            this.gbConsulta.Size = new System.Drawing.Size(548, 455);
             this.gbConsulta.TabIndex = 1;
             this.gbConsulta.TabStop = false;
             this.gbConsulta.Text = "Consulta de datos";
@@ -83,7 +86,7 @@
             // lblPromedio
             // 
             this.lblPromedio.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblPromedio.Location = new System.Drawing.Point(524, 324);
+            this.lblPromedio.Location = new System.Drawing.Point(357, 315);
             this.lblPromedio.Name = "lblPromedio";
             this.lblPromedio.Size = new System.Drawing.Size(175, 31);
             this.lblPromedio.TabIndex = 7;
@@ -91,7 +94,7 @@
             // lblClientes
             // 
             this.lblClientes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblClientes.Location = new System.Drawing.Point(524, 273);
+            this.lblClientes.Location = new System.Drawing.Point(357, 264);
             this.lblClientes.Name = "lblClientes";
             this.lblClientes.Size = new System.Drawing.Size(175, 31);
             this.lblClientes.TabIndex = 6;
@@ -99,7 +102,7 @@
             // lblPromedioDeSaldos
             // 
             this.lblPromedioDeSaldos.AutoSize = true;
-            this.lblPromedioDeSaldos.Location = new System.Drawing.Point(369, 325);
+            this.lblPromedioDeSaldos.Location = new System.Drawing.Point(202, 316);
             this.lblPromedioDeSaldos.Name = "lblPromedioDeSaldos";
             this.lblPromedioDeSaldos.Size = new System.Drawing.Size(131, 16);
             this.lblPromedioDeSaldos.TabIndex = 5;
@@ -107,17 +110,18 @@
             // 
             // btnListar
             // 
-            this.btnListar.Location = new System.Drawing.Point(538, 382);
+            this.btnListar.Location = new System.Drawing.Point(371, 373);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(161, 56);
             this.btnListar.TabIndex = 4;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
             // lblTotal
             // 
             this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTotal.Location = new System.Drawing.Point(524, 222);
+            this.lblTotal.Location = new System.Drawing.Point(357, 213);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(175, 31);
             this.lblTotal.TabIndex = 3;
@@ -125,7 +129,7 @@
             // lblCantidadDeClientes
             // 
             this.lblCantidadDeClientes.AutoSize = true;
-            this.lblCantidadDeClientes.Location = new System.Drawing.Point(369, 274);
+            this.lblCantidadDeClientes.Location = new System.Drawing.Point(202, 265);
             this.lblCantidadDeClientes.Name = "lblCantidadDeClientes";
             this.lblCantidadDeClientes.Size = new System.Drawing.Size(129, 16);
             this.lblCantidadDeClientes.TabIndex = 2;
@@ -134,7 +138,7 @@
             // lblTotaldeSaldos
             // 
             this.lblTotaldeSaldos.AutoSize = true;
-            this.lblTotaldeSaldos.Location = new System.Drawing.Point(369, 223);
+            this.lblTotaldeSaldos.Location = new System.Drawing.Point(202, 214);
             this.lblTotaldeSaldos.Name = "lblTotaldeSaldos";
             this.lblTotaldeSaldos.Size = new System.Drawing.Size(101, 16);
             this.lblTotaldeSaldos.TabIndex = 1;
@@ -142,29 +146,45 @@
             // 
             // dgvDuedas
             // 
+            this.dgvDuedas.AllowUserToAddRows = false;
+            this.dgvDuedas.AllowUserToDeleteRows = false;
             this.dgvDuedas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDuedas.Location = new System.Drawing.Point(20, 33);
             this.dgvDuedas.Name = "dgvDuedas";
+            this.dgvDuedas.ReadOnly = true;
             this.dgvDuedas.RowHeadersWidth = 51;
             this.dgvDuedas.RowTemplate.Height = 24;
-            this.dgvDuedas.Size = new System.Drawing.Size(679, 159);
+            this.dgvDuedas.Size = new System.Drawing.Size(512, 159);
             this.dgvDuedas.TabIndex = 0;
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(552, 23);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
             // 
             // frmClientesSaldo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 538);
+            this.ClientSize = new System.Drawing.Size(576, 538);
             this.Controls.Add(this.gbConsulta);
             this.Controls.Add(this.pnlMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmClientesSaldo";
             this.Text = "Listado de Clientes Deudores";
+            this.Load += new System.EventHandler(this.frmClientesSaldo_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             this.gbConsulta.ResumeLayout(false);
             this.gbConsulta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDuedas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -181,5 +201,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblCantidadDeClientes;
         private System.Windows.Forms.Label lblTotaldeSaldos;
+        private System.Windows.Forms.PictureBox picCerrar;
     }
 }

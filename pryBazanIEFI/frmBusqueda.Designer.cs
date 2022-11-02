@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlMen = new System.Windows.Forms.Panel();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblCodigo = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
@@ -47,10 +48,9 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMen.SuspendLayout();
-            this.gbdatos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
+            this.gbdatos.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMen
@@ -63,6 +63,17 @@
             this.pnlMen.Name = "pnlMen";
             this.pnlMen.Size = new System.Drawing.Size(500, 52);
             this.pnlMen.TabIndex = 0;
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(440, 22);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 1;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblTitulo
             // 
@@ -231,17 +242,6 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // picCerrar
-            // 
-            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
-            this.picCerrar.Location = new System.Drawing.Point(440, 22);
-            this.picCerrar.Name = "picCerrar";
-            this.picCerrar.Size = new System.Drawing.Size(30, 22);
-            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCerrar.TabIndex = 1;
-            this.picCerrar.TabStop = false;
-            this.picCerrar.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // frmBusqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -261,9 +261,9 @@
             this.Load += new System.EventHandler(this.frmBusqueda_Load);
             this.pnlMen.ResumeLayout(false);
             this.pnlMen.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.gbdatos.ResumeLayout(false);
             this.gbdatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -31,7 +31,7 @@
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
             this.lblActividad = new System.Windows.Forms.Label();
-            this.lstActivivdad = new System.Windows.Forms.ComboBox();
+            this.lstActividad = new System.Windows.Forms.ComboBox();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.lblMayorSaldo = new System.Windows.Forms.Label();
             this.lblPromedioSaldo = new System.Windows.Forms.Label();
@@ -41,18 +41,21 @@
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
             this.gbEtiquetas = new System.Windows.Forms.GroupBox();
-            this.lblTotalSaldo = new System.Windows.Forms.Label();
-            this.lblMenor = new System.Windows.Forms.Label();
-            this.lblPromedio = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.lblPromedio = new System.Windows.Forms.Label();
+            this.lblMenor = new System.Windows.Forms.Label();
+            this.lblTotalSaldo = new System.Windows.Forms.Label();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.gbEtiquetas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblMenu);
             this.pnlMenu.Location = new System.Drawing.Point(-6, -7);
             this.pnlMenu.Name = "pnlMenu";
@@ -78,13 +81,13 @@
             this.lblActividad.TabIndex = 1;
             this.lblActividad.Text = "Actividad";
             // 
-            // lstActivivdad
+            // lstActividad
             // 
-            this.lstActivivdad.FormattingEnabled = true;
-            this.lstActivivdad.Location = new System.Drawing.Point(92, 63);
-            this.lstActivivdad.Name = "lstActivivdad";
-            this.lstActivivdad.Size = new System.Drawing.Size(358, 24);
-            this.lstActivivdad.TabIndex = 2;
+            this.lstActividad.FormattingEnabled = true;
+            this.lstActividad.Location = new System.Drawing.Point(92, 63);
+            this.lstActividad.Name = "lstActividad";
+            this.lstActividad.Size = new System.Drawing.Size(358, 24);
+            this.lstActividad.TabIndex = 2;
             // 
             // dgvClientes
             // 
@@ -139,6 +142,7 @@
             this.btnListar.TabIndex = 2;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
             // btnImprimir
             // 
@@ -175,22 +179,13 @@
             this.gbEtiquetas.TabStop = false;
             this.gbEtiquetas.Text = "Datos";
             // 
-            // lblTotalSaldo
+            // lblTotal
             // 
-            this.lblTotalSaldo.AutoSize = true;
-            this.lblTotalSaldo.Location = new System.Drawing.Point(322, 112);
-            this.lblTotalSaldo.Name = "lblTotalSaldo";
-            this.lblTotalSaldo.Size = new System.Drawing.Size(77, 16);
-            this.lblTotalSaldo.TabIndex = 10;
-            this.lblTotalSaldo.Text = "Total Saldo";
-            // 
-            // lblMenor
-            // 
-            this.lblMenor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMenor.Location = new System.Drawing.Point(415, 40);
-            this.lblMenor.Name = "lblMenor";
-            this.lblMenor.Size = new System.Drawing.Size(134, 32);
-            this.lblMenor.TabIndex = 11;
+            this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTotal.Location = new System.Drawing.Point(415, 111);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(134, 32);
+            this.lblTotal.TabIndex = 13;
             // 
             // lblPromedio
             // 
@@ -200,13 +195,33 @@
             this.lblPromedio.Size = new System.Drawing.Size(134, 32);
             this.lblPromedio.TabIndex = 12;
             // 
-            // lblTotal
+            // lblMenor
             // 
-            this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTotal.Location = new System.Drawing.Point(415, 111);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(134, 32);
-            this.lblTotal.TabIndex = 13;
+            this.lblMenor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMenor.Location = new System.Drawing.Point(415, 40);
+            this.lblMenor.Name = "lblMenor";
+            this.lblMenor.Size = new System.Drawing.Size(134, 32);
+            this.lblMenor.TabIndex = 11;
+            // 
+            // lblTotalSaldo
+            // 
+            this.lblTotalSaldo.AutoSize = true;
+            this.lblTotalSaldo.Location = new System.Drawing.Point(322, 112);
+            this.lblTotalSaldo.Name = "lblTotalSaldo";
+            this.lblTotalSaldo.Size = new System.Drawing.Size(77, 16);
+            this.lblTotalSaldo.TabIndex = 10;
+            this.lblTotalSaldo.Text = "Total Saldo";
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(580, 16);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
             // 
             // frmClientesActividad
             // 
@@ -218,17 +233,19 @@
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.btnListar);
             this.Controls.Add(this.dgvClientes);
-            this.Controls.Add(this.lstActivivdad);
+            this.Controls.Add(this.lstActividad);
             this.Controls.Add(this.lblActividad);
             this.Controls.Add(this.pnlMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmClientesActividad";
             this.Text = "frmClientesActividad";
+            this.Load += new System.EventHandler(this.frmClientesActividad_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.gbEtiquetas.ResumeLayout(false);
             this.gbEtiquetas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,7 +256,7 @@
         private System.Windows.Forms.Panel pnlMenu;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.Label lblActividad;
-        private System.Windows.Forms.ComboBox lstActivivdad;
+        private System.Windows.Forms.ComboBox lstActividad;
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Label lblMayorSaldo;
         private System.Windows.Forms.Label lblPromedioSaldo;
@@ -253,5 +270,6 @@
         private System.Windows.Forms.Label lblPromedio;
         private System.Windows.Forms.Label lblMenor;
         private System.Windows.Forms.Label lblTotalSaldo;
+        private System.Windows.Forms.PictureBox picCerrar;
     }
 }

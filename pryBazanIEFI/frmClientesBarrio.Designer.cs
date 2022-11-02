@@ -34,13 +34,16 @@
             this.lstBarrio = new System.Windows.Forms.ComboBox();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.btnListar = new System.Windows.Forms.Button();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblMenu);
             this.pnlMenu.Location = new System.Drawing.Point(-30, -28);
             this.pnlMenu.Name = "pnlMenu";
@@ -68,6 +71,7 @@
             // 
             // lstBarrio
             // 
+            this.lstBarrio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstBarrio.FormattingEnabled = true;
             this.lstBarrio.Location = new System.Drawing.Point(84, 69);
             this.lstBarrio.Name = "lstBarrio";
@@ -76,9 +80,12 @@
             // 
             // dgvClientes
             // 
+            this.dgvClientes.AllowUserToAddRows = false;
+            this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Location = new System.Drawing.Point(27, 114);
             this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.RowTemplate.Height = 24;
             this.dgvClientes.Size = new System.Drawing.Size(509, 210);
@@ -92,6 +99,18 @@
             this.btnListar.TabIndex = 4;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(546, 37);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
             // 
             // frmClientesBarrio
             // 
@@ -106,9 +125,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmClientesBarrio";
             this.Text = "frmClientesBarrio";
+            this.Load += new System.EventHandler(this.frmClientesBarrio_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +143,6 @@
         private System.Windows.Forms.ComboBox lstBarrio;
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Button btnListar;
+        private System.Windows.Forms.PictureBox picCerrar;
     }
 }

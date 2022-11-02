@@ -32,13 +32,16 @@
             this.lblMenu = new System.Windows.Forms.Label();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.btnListar = new System.Windows.Forms.Button();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
             // 
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblMenu);
             this.pnlMenu.Location = new System.Drawing.Point(-10, -9);
             this.pnlMenu.Name = "pnlMenu";
@@ -73,6 +76,18 @@
             this.btnListar.TabIndex = 2;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(768, 22);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
             // 
             // frmClientesTotal
             // 
@@ -88,6 +103,7 @@
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -98,5 +114,6 @@
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Button btnListar;
+        private System.Windows.Forms.PictureBox picCerrar;
     }
 }

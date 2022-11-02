@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.lblMenu = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lstNombre = new System.Windows.Forms.ComboBox();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.gbCliente = new System.Windows.Forms.GroupBox();
             this.lblActividad = new System.Windows.Forms.Label();
-            this.lblDeuda = new System.Windows.Forms.Label();
-            this.lblDeudaCliente = new System.Windows.Forms.Label();
+            this.lblSaldo = new System.Windows.Forms.Label();
+            this.lblSaldoCliente = new System.Windows.Forms.Label();
             this.lblActividadCliente = new System.Windows.Forms.Label();
-            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
-            this.gbCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
+            this.gbCliente.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -53,6 +53,17 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(478, 49);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar1;
+            this.picCerrar.Location = new System.Drawing.Point(306, 16);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(27, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // lblMenu
             // 
@@ -75,6 +86,7 @@
             // 
             // lstNombre
             // 
+            this.lstNombre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstNombre.FormattingEnabled = true;
             this.lstNombre.Location = new System.Drawing.Point(149, 62);
             this.lstNombre.Name = "lstNombre";
@@ -94,8 +106,8 @@
             // gbCliente
             // 
             this.gbCliente.Controls.Add(this.lblActividad);
-            this.gbCliente.Controls.Add(this.lblDeuda);
-            this.gbCliente.Controls.Add(this.lblDeudaCliente);
+            this.gbCliente.Controls.Add(this.lblSaldo);
+            this.gbCliente.Controls.Add(this.lblSaldoCliente);
             this.gbCliente.Controls.Add(this.lblActividadCliente);
             this.gbCliente.Location = new System.Drawing.Point(15, 162);
             this.gbCliente.Name = "gbCliente";
@@ -112,22 +124,22 @@
             this.lblActividad.Size = new System.Drawing.Size(184, 32);
             this.lblActividad.TabIndex = 16;
             // 
-            // lblDeuda
+            // lblSaldo
             // 
-            this.lblDeuda.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblDeuda.Location = new System.Drawing.Point(104, 83);
-            this.lblDeuda.Name = "lblDeuda";
-            this.lblDeuda.Size = new System.Drawing.Size(184, 32);
-            this.lblDeuda.TabIndex = 15;
+            this.lblSaldo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSaldo.Location = new System.Drawing.Point(104, 83);
+            this.lblSaldo.Name = "lblSaldo";
+            this.lblSaldo.Size = new System.Drawing.Size(184, 32);
+            this.lblSaldo.TabIndex = 15;
             // 
-            // lblDeudaCliente
+            // lblSaldoCliente
             // 
-            this.lblDeudaCliente.AutoSize = true;
-            this.lblDeudaCliente.Location = new System.Drawing.Point(22, 84);
-            this.lblDeudaCliente.Name = "lblDeudaCliente";
-            this.lblDeudaCliente.Size = new System.Drawing.Size(48, 16);
-            this.lblDeudaCliente.TabIndex = 13;
-            this.lblDeudaCliente.Text = "Deuda";
+            this.lblSaldoCliente.AutoSize = true;
+            this.lblSaldoCliente.Location = new System.Drawing.Point(22, 84);
+            this.lblSaldoCliente.Name = "lblSaldoCliente";
+            this.lblSaldoCliente.Size = new System.Drawing.Size(43, 16);
+            this.lblSaldoCliente.TabIndex = 13;
+            this.lblSaldoCliente.Text = "Saldo";
             // 
             // lblActividadCliente
             // 
@@ -137,17 +149,6 @@
             this.lblActividadCliente.Size = new System.Drawing.Size(63, 16);
             this.lblActividadCliente.TabIndex = 14;
             this.lblActividadCliente.Text = "Actividad";
-            // 
-            // picCerrar
-            // 
-            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar1;
-            this.picCerrar.Location = new System.Drawing.Point(306, 16);
-            this.picCerrar.Name = "picCerrar";
-            this.picCerrar.Size = new System.Drawing.Size(27, 22);
-            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCerrar.TabIndex = 2;
-            this.picCerrar.TabStop = false;
-            this.picCerrar.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // frmConsultaUnCliente
             // 
@@ -165,9 +166,9 @@
             this.Load += new System.EventHandler(this.frmConsultaUnCliente_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.gbCliente.ResumeLayout(false);
             this.gbCliente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,8 +183,8 @@
         private System.Windows.Forms.Button btnMostrar;
         private System.Windows.Forms.GroupBox gbCliente;
         private System.Windows.Forms.Label lblActividad;
-        private System.Windows.Forms.Label lblDeuda;
-        private System.Windows.Forms.Label lblDeudaCliente;
+        private System.Windows.Forms.Label lblSaldo;
+        private System.Windows.Forms.Label lblSaldoCliente;
         private System.Windows.Forms.Label lblActividadCliente;
         private System.Windows.Forms.PictureBox picCerrar;
     }

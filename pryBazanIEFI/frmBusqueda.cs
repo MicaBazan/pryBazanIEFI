@@ -48,6 +48,7 @@ namespace pryBazanIEFI
             if (dataSetGimnasio.Tables[0].Rows.Count == 0)
             {
                 MessageBox.Show("Lo siento el código ingresado no existe", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtCodigo.Text = "";
                 dataSetGimnasio.Dispose();
                 return;
             }
@@ -174,7 +175,7 @@ namespace pryBazanIEFI
         private void btnModificar_Click(object sender, EventArgs e)
         {
             habilitar();
-            txtNombre.Enabled = false;
+            txtCodigo.Enabled = false;
             agregarListas();
             buscar();
         }
@@ -197,6 +198,9 @@ namespace pryBazanIEFI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string barrio = lstBarrio.Text;
+            string actividad = lstActividad.Text;
+
             OleDbConnection conexion = new OleDbConnection(ruta);
             string update = "UPDATE Socio SET Nombre_Apellido=@Nombre,Direccion=@Direccion,Codigo_Barrio=@Barrio,Codigo_Actividad=@Actividad,Saldo=@Saldo WHERE Dni_Socio=@Codigo";
             
@@ -211,57 +215,50 @@ namespace pryBazanIEFI
 
 
 
-                string ltBarrio = lstBarrio.Text;
 
-                string selectBarrio = "Select * From Tabla_Barrio Where Nombre_Barrio='" + ltBarrio + "'";
-                OleDbDataAdapter adaptadorBarrio = new OleDbDataAdapter(selectBarrio, conexion);
-                DataSet ds = new DataSet();
-                conexion.Open();
-                adaptadorBarrio.Fill(ds);
-                conexion.Close();
+                //Buscar código Barrio
+                string selectBarrio = "Select * From Tabla_Barrio Where Nombre_Barrio='" + barrio + "'";
 
-                if (ds.Tables[0].Rows.Count == 0)
+                OleDbDataAdapter adapterBarrio = new OleDbDataAdapter(selectBarrio, conexion);
+
+                DataSet dtBarrio = new DataSet();
+
+                adapterBarrio.Fill(dtBarrio);
+
+
+                if (dtBarrio.Tables[0].Rows.Count == 0)
                 {
-                    ds.Dispose();
+                    dtBarrio.Dispose();
                     return;
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@Barrio", "Codigo_Barrio");
-                    ds.Dispose();
-                    return;
+                    cmd.Parameters.AddWithValue("@Barrio", (dtBarrio.Tables[0].Rows[0]["Codigo_Barrio"].ToString()));
+                    dtBarrio.Dispose();
                 }
 
 
 
 
-                //cmd.Parameters.AddWithValue("@Barrio", lstBarrio.Text);
-                //cmd.Parameters.AddWithValue("@Actividad", lstActividad.Text);
 
+                //Buscar código Actividad
+                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
 
+                OleDbDataAdapter adapterActividad = new OleDbDataAdapter(selectactividad, conexion);
 
-                string ltActividad = lstBarrio.Text;
+                DataSet dtActividad = new DataSet();
 
-                string selectActividad = "Select * From Tabla_Barrio Where Nombre_Barrio=" + ltActividad;
-                OleDbDataAdapter adaptadorActividad = new OleDbDataAdapter(selectActividad, conexion);
-                DataSet dsActividad = new DataSet();
-                conexion.Open();
-                adaptadorActividad.Fill(ds);
-                conexion.Close();
+                adapterActividad.Fill(dtActividad);
 
-                if (ds.Tables[0].Rows.Count == 0)
+                if (dtActividad.Tables[0].Rows.Count == 0)
                 {
-                    ds.Dispose();
+                    dtActividad.Dispose();
                     return;
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@Actividad", lstActividad.Text);
-                    ds.Dispose();
-                    return;
+                    cmd.Parameters.AddWithValue("@Actividad", (dtActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString()));
                 }
-
-
 
 
 
@@ -287,56 +284,6 @@ namespace pryBazanIEFI
 
         }
 
-        private void modificarBarrio()
-        {
-            string ltBarrio = lstBarrio.Text;
-            OleDbConnection conexion = new OleDbConnection(ruta);
-
-            string select = "Select * From Tabla_Barrio Where Nombre_Barrio=" + ltBarrio;
-            OleDbDataAdapter Adaptador = new OleDbDataAdapter(select, conexion);
-            DataSet ds = new DataSet();
-            conexion.Open();
-            Adaptador.Fill(ds);
-            conexion.Close();
-
-            if (ds.Tables[0].Rows.Count == 0)
-            {
-                ds.Dispose();
-                return;
-            }
-            else
-            {
-                //cmd.Parameters.AddWithValue("@Barrio", lstBarrio.Text);
-                ds.Dispose();
-                return;
-            }
-        }
-
-        private void modificarActividad()
-        {
-            string ltActividad = lstBarrio.Text;
-            OleDbConnection conexion = new OleDbConnection(ruta);
-
-            string select = "Select * From Tabla_Barrio Where Nombre_Barrio=" + ltActividad;
-            OleDbDataAdapter Adaptador = new OleDbDataAdapter(select, conexion);
-            DataSet ds = new DataSet();
-            conexion.Open();
-            Adaptador.Fill(ds);
-            conexion.Close();
-
-            if (ds.Tables[0].Rows.Count == 0)
-            {
-                ds.Dispose();
-                return;
-            }
-            else
-            {
-                //lstActividad = ds.Tables[0].Rows[0]["Codigo_Actividad"].ToString();
-                ds.Dispose();
-                return;
-            }
-        }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             String codigo = txtCodigo.Text;
@@ -349,6 +296,7 @@ namespace pryBazanIEFI
             conexion.Close();
             interfaz_Inicial();
             MessageBox.Show("Registro Eliminado Existosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            txtCodigo.Text = "";
             limpiar();
         }
     }
