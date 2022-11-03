@@ -69,10 +69,10 @@ namespace pryBazanIEFI
 
         private void buscarBarrio()
         {
-            string barrio = lstBarrio.Text;
+            string barrio = Convert.ToString(lstBarrio.Text);
 
             OleDbConnection conexion = new OleDbConnection(ruta);
-            string cadenaBarrio = "Select * From Tabla_Barrio Where Codigo_Barrio=" + Convert.ToString(barrio);
+            string cadenaBarrio = "Select * From Tabla_Barrio Where Codigo_Barrio=" + barrio;
             OleDbDataAdapter adaptadorBarrio = new OleDbDataAdapter(cadenaBarrio, conexion);
             DataSet dataSetBarrio = new DataSet();
             conexion.Open();
@@ -147,6 +147,7 @@ namespace pryBazanIEFI
             conexionActividad.Close();
         }
 
+
         private void limpiar()
         {
             txtNombre.Text = "";
@@ -155,6 +156,7 @@ namespace pryBazanIEFI
             lstActividad.Text = "";
             txtSaldo.Text = "";
         }
+
 
         private void habilitar()
         {
@@ -214,8 +216,6 @@ namespace pryBazanIEFI
 
 
 
-
-
                 //Buscar código Barrio
                 string selectBarrio = "Select * From Tabla_Barrio Where Nombre_Barrio='" + barrio + "'";
 
@@ -240,7 +240,6 @@ namespace pryBazanIEFI
 
 
 
-
                 //Buscar código Actividad
                 string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
 
@@ -261,17 +260,12 @@ namespace pryBazanIEFI
                 }
 
 
-
-
-
-
                 cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
 
                 cmd.Parameters.AddWithValue("@Codigo", txtCodigo.Text);
                 cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
-                interfaz_Inicial();
                 MessageBox.Show("Registro Actualizado Existosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
             }
@@ -279,8 +273,9 @@ namespace pryBazanIEFI
             {
                 MessageBox.Show(ex.Message);
                 conexion.Close();
-                interfaz_Inicial();
             }
+
+            interfaz_Inicial();
 
         }
 

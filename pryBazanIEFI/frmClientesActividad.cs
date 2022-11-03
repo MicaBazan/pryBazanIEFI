@@ -24,7 +24,6 @@ namespace pryBazanIEFI
     public partial class frmClientesActividad : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
-        int[] total = new int[100];
 
         public frmClientesActividad()
         {
@@ -70,107 +69,96 @@ namespace pryBazanIEFI
 
 
 
-            //Buscar código actividad
-            string selectActividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
-            OleDbDataAdapter daActividad = new OleDbDataAdapter(selectActividad, conexion); 
-            DataSet dsActividad = new DataSet();
-            daActividad.Fill(dsActividad);
-
-            if(dsActividad.Tables[0].Rows.Count == 0)
-            {
-                dsActividad.Dispose();
-                return;
-            }
-            else
-            {
-                codActividad = dsActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString();
-            }
-
-
-
-            //Mover a la grilla
-
-            DataTable dt = new DataTable();
-            string selectdgv = "SELECT Dni_Socio, Nombre_Apellido FROM Socio WHERE Codigo_Actividad=" + codActividad;
-            OleDbCommand cmd = new OleDbCommand(selectdgv, conexion);
-            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-            da.SelectCommand = cmd;
-            da.Fill(dt);
-            dgvClientes.DataSource = dt;
-            
-
-
-
-            //Busca Mayor
             try
             {
+
+                //Buscar código actividad
+                string selectActividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
+                OleDbDataAdapter daActividad = new OleDbDataAdapter(selectActividad, conexion);
+                DataSet dsActividad = new DataSet();
+                daActividad.Fill(dsActividad);
+
+                if (dsActividad.Tables[0].Rows.Count == 0)
+                {
+                    dsActividad.Dispose();
+                    return;
+                }
+                else
+                {
+                    codActividad = dsActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString();
+                }
+
+
+
+                //Mover a la grilla
+                DataTable dt = new DataTable();
+                string selectdgv = "SELECT Dni_Socio, Nombre_Apellido FROM Socio WHERE Codigo_Actividad=" + codActividad;
+                OleDbCommand cmd = new OleDbCommand(selectdgv, conexion);
+                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+                dgvClientes.DataSource = dt;
+
+
+
+
+                //Busca Mayor
                 string selectMayor = "SELECT MAX(Saldo) AS ValorMaximo FROM Socio Where Codigo_Actividad=" + codActividad;
                 OleDbCommand cmdMayor = new OleDbCommand(selectMayor, conexion);
                 OleDbDataAdapter daMayor = new OleDbDataAdapter(cmdMayor);
 
                 lblMayor.Text = Convert.ToString(cmdMayor.ExecuteScalar());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+              
 
 
 
-
-            //Buscar Menor
-            try
-            {
+                //Buscar Menor   
                 string selectMenor = "SELECT MIN(Saldo) AS ValorMinimo FROM Socio WHERE Codigo_Actividad=" + codActividad;
                 OleDbCommand cmdMenor = new OleDbCommand(selectMenor, conexion);
                 OleDbDataAdapter daMenor = new OleDbDataAdapter(cmdMenor);
 
                 lblMenor.Text = Convert.ToString(cmdMenor.ExecuteScalar());
+                
+                
+
+                //Total saldos
+                int[] vecSaldo = new int[100];
+                int indice = 0;
+
+                string selectSaldo = "SELECT Saldo FROM Socio WHERE Codigo_Actividad=" + codActividad;
+                OleDbCommand cmdSaldo = new OleDbCommand(selectSaldo, conexion);
+                OleDbDataAdapter daSaldo = new OleDbDataAdapter(cmdSaldo);
+
+                OleDbDataReader objLector = cmdSaldo.ExecuteReader();
+                while (objLector.Read())
+                {
+                    vecSaldo[indice] = Convert.ToInt32(objLector[0]);
+                    indice++;
+                }
+
+                int suma = vecSaldo.Sum();
+                lblTotal.Text = suma.ToString();
+
+
+
+
+
+                //Sacar Promedio
+                int total = Convert.ToInt32(lblTotal.Text);
+                int cantidadRegistros = dgvClientes.Rows.Count;
+
+
+                promedio = Convert.ToString(total / cantidadRegistros);
+                lblPromedio.Text = promedio;
+
+
             }
             catch(Exception ex)
             {
+
                 MessageBox.Show(ex.Message);
+
             }
-
-
-
-
-
-
-            //Total saldos
-            int[] vecSaldo = new int[100];
-            int indice = 0;
-            
-
-            string selectSaldo = "SELECT Saldo FROM Socio WHERE Codigo_Actividad=" + codActividad;
-            OleDbCommand cmdSaldo = new OleDbCommand(selectSaldo, conexion);
-            OleDbDataAdapter daSaldo = new OleDbDataAdapter(cmdSaldo);
-            
-            OleDbDataReader objLector = cmdSaldo.ExecuteReader();
-            while (objLector.Read())
-            {
-                vecSaldo[indice] =Convert.ToInt32(objLector[0]);
-                indice++;
-            }
-
-            int suma = vecSaldo.Sum();
-            lblTotal.Text = suma.ToString();
-
-
-
-
-
-
-            //Sacar Promedio
-            int total = Convert.ToInt32(lblTotal.Text);
-            int cantidadRegistros = dgvClientes.Rows.Count;
-
-
-            promedio = Convert.ToString(total / cantidadRegistros);
-            lblPromedio.Text = promedio;
-
-
-
 
 
             conexion.Close();
