@@ -54,7 +54,7 @@
             // 
             // pnlMenu
             // 
-            this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.BackColor = System.Drawing.Color.Silver;
             this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblMenu);
             this.pnlMenu.Location = new System.Drawing.Point(-6, -7);
@@ -99,6 +99,7 @@
             this.lstActividad.Name = "lstActividad";
             this.lstActividad.Size = new System.Drawing.Size(358, 24);
             this.lstActividad.TabIndex = 2;
+            this.lstActividad.TextChanged += new System.EventHandler(this.lstActividad_TextChanged);
             // 
             // dgvClientes
             // 
@@ -150,32 +151,44 @@
             // 
             // btnListar
             // 
+            this.btnListar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListar.ForeColor = System.Drawing.Color.White;
             this.btnListar.Location = new System.Drawing.Point(472, 63);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(129, 60);
             this.btnListar.TabIndex = 2;
             this.btnListar.Text = "Listar";
-            this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.UseVisualStyleBackColor = false;
             this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
             // btnImprimir
             // 
+            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimir.ForeColor = System.Drawing.Color.White;
             this.btnImprimir.Location = new System.Drawing.Point(472, 147);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(129, 60);
             this.btnImprimir.TabIndex = 10;
             this.btnImprimir.Text = "Imprimir";
-            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.UseVisualStyleBackColor = false;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // btnExportar
             // 
+            this.btnExportar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.White;
             this.btnExportar.Location = new System.Drawing.Point(472, 236);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(129, 60);
             this.btnExportar.TabIndex = 11;
             this.btnExportar.Text = "Exportar";
-            this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.UseVisualStyleBackColor = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // gbEtiquetas

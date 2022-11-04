@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.txtDni = new System.Windows.Forms.MaskedTextBox();
             this.txtSaldo = new System.Windows.Forms.TextBox();
             this.lstActividad = new System.Windows.Forms.ComboBox();
             this.lstBarrio = new System.Windows.Forms.ComboBox();
@@ -45,6 +44,7 @@
             this.btnCargar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblNuevo = new System.Windows.Forms.Label();
+            this.txtDni = new System.Windows.Forms.TextBox();
             this.gbDatos.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -72,24 +72,15 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Carga de datos";
             // 
-            // txtDni
-            // 
-            this.txtDni.Location = new System.Drawing.Point(88, 39);
-            this.txtDni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtDni.Mask = "9999";
-            this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(43, 22);
-            this.txtDni.TabIndex = 10;
-            this.txtDni.TextChanged += new System.EventHandler(this.txtDni_TextChanged);
-            // 
             // txtSaldo
             // 
             this.txtSaldo.Location = new System.Drawing.Point(451, 155);
             this.txtSaldo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSaldo.Name = "txtSaldo";
             this.txtSaldo.Size = new System.Drawing.Size(108, 22);
-            this.txtSaldo.TabIndex = 9;
+            this.txtSaldo.TabIndex = 5;
             this.txtSaldo.TextChanged += new System.EventHandler(this.txtSaldo_TextChanged);
+            this.txtSaldo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSaldo_KeyPress);
             // 
             // lstActividad
             // 
@@ -99,7 +90,7 @@
             this.lstActividad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstActividad.Name = "lstActividad";
             this.lstActividad.Size = new System.Drawing.Size(175, 24);
-            this.lstActividad.TabIndex = 8;
+            this.lstActividad.TabIndex = 4;
             this.lstActividad.TextChanged += new System.EventHandler(this.lstActividad_TextChanged);
             // 
             // lstBarrio
@@ -110,7 +101,7 @@
             this.lstBarrio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstBarrio.Name = "lstBarrio";
             this.lstBarrio.Size = new System.Drawing.Size(152, 24);
-            this.lstBarrio.TabIndex = 7;
+            this.lstBarrio.TabIndex = 3;
             this.lstBarrio.TextChanged += new System.EventHandler(this.lstBarrio_TextChanged);
             // 
             // txtDireccion
@@ -119,7 +110,7 @@
             this.txtDireccion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(265, 22);
-            this.txtDireccion.TabIndex = 6;
+            this.txtDireccion.TabIndex = 2;
             this.txtDireccion.TextChanged += new System.EventHandler(this.txtDireccion_TextChanged);
             // 
             // txtNombre
@@ -128,8 +119,9 @@
             this.txtNombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(247, 22);
-            this.txtNombre.TabIndex = 5;
+            this.txtNombre.TabIndex = 1;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // lblBarrio
             // 
@@ -187,29 +179,37 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.White;
             this.btnSalir.Location = new System.Drawing.Point(492, 295);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(145, 59);
-            this.btnSalir.TabIndex = 11;
+            this.btnSalir.TabIndex = 0;
             this.btnSalir.Text = "Salir";
-            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnCargar
             // 
+            this.btnCargar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnCargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCargar.ForeColor = System.Drawing.Color.White;
             this.btnCargar.Location = new System.Drawing.Point(312, 295);
             this.btnCargar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(145, 59);
-            this.btnCargar.TabIndex = 12;
+            this.btnCargar.TabIndex = 0;
             this.btnCargar.Text = "Cargar";
-            this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnCargar.UseVisualStyleBackColor = false;
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.panel1.BackColor = System.Drawing.Color.Silver;
             this.panel1.Controls.Add(this.lblNuevo);
             this.panel1.Location = new System.Drawing.Point(0, -7);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -227,6 +227,14 @@
             this.lblNuevo.Size = new System.Drawing.Size(113, 18);
             this.lblNuevo.TabIndex = 0;
             this.lblNuevo.Text = "Nuevo Cliente";
+            // 
+            // txtDni
+            // 
+            this.txtDni.Location = new System.Drawing.Point(88, 40);
+            this.txtDni.Name = "txtDni";
+            this.txtDni.Size = new System.Drawing.Size(100, 22);
+            this.txtDni.TabIndex = 0;
+            this.txtDni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDni_KeyPress);
             // 
             // frmAgregarCliente
             // 
@@ -268,6 +276,6 @@
         private System.Windows.Forms.Button btnCargar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblNuevo;
-        private System.Windows.Forms.MaskedTextBox txtDni;
+        private System.Windows.Forms.TextBox txtDni;
     }
 }

@@ -147,8 +147,11 @@ namespace pryBazanIEFI
 
         private void frmAgregarCliente_Load(object sender, EventArgs e)
         {
+            
             agregarListas();
             interfazInicial();
+            txtDni.Focus();
+            
         }
 
 
@@ -206,6 +209,30 @@ namespace pryBazanIEFI
         private void txtSaldo_TextChanged(object sender, EventArgs e)
         {
             validar();
+        }
+
+        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true; 
+            }
+        }
+
+        private void txtSaldo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 & e.KeyChar <= 64) || (e.KeyChar >= 91 & e.KeyChar <= 96) || (e.KeyChar >= 123 & e.KeyChar <= 255))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -50,6 +50,10 @@ namespace pryBazanIEFI
                 MessageBox.Show("Lo siento el código ingresado no existe", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtCodigo.Text = "";
                 dataSetGimnasio.Dispose();
+
+                btnEliminar.Enabled = false;
+                btnModificar.Enabled = false;
+
                 return;
             }
             else
@@ -62,6 +66,9 @@ namespace pryBazanIEFI
                 buscarActividad();
                 txtSaldo.Text = dataSetGimnasio.Tables[0].Rows[0]["Saldo"].ToString();
                 dataSetGimnasio.Dispose();
+
+                btnEliminar.Enabled = true;
+                btnModificar.Enabled = true;
 
                 return;
             }
@@ -184,6 +191,7 @@ namespace pryBazanIEFI
 
         private void interfaz_Inicial()
         {
+            txtCodigo.Enabled = true;
             txtNombre.Enabled = false;
             txtDireccion.Enabled = false;
             lstBarrio.Enabled = false;
@@ -191,6 +199,9 @@ namespace pryBazanIEFI
             txtSaldo.Enabled = false;
 
             btnGuardar.Enabled = false;
+            btnBuscar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnModificar.Enabled = false;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -293,6 +304,26 @@ namespace pryBazanIEFI
             MessageBox.Show("Registro Eliminado Existosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             txtCodigo.Text = "";
             limpiar();
+        }
+
+        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsDigit(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+            if (txtCodigo.Text != string.Empty)
+            {
+                btnBuscar.Enabled = true;
+            }
+            else
+            {
+                btnBuscar.Enabled = false;
+            }
         }
     }
 }

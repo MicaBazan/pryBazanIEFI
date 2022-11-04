@@ -46,7 +46,7 @@
             // 
             // pnlMenu
             // 
-            this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.BackColor = System.Drawing.Color.Silver;
             this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblMenu);
             this.pnlMenu.Location = new System.Drawing.Point(-7, -7);
@@ -95,12 +95,16 @@
             // 
             // btnMostrar
             // 
+            this.btnMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnMostrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMostrar.ForeColor = System.Drawing.Color.White;
             this.btnMostrar.Location = new System.Drawing.Point(149, 101);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(178, 46);
             this.btnMostrar.TabIndex = 3;
             this.btnMostrar.Text = "Mostrar";
-            this.btnMostrar.UseVisualStyleBackColor = true;
+            this.btnMostrar.UseVisualStyleBackColor = false;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // gbCliente

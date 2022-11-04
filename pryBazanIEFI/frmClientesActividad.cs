@@ -36,6 +36,7 @@ namespace pryBazanIEFI
             lstActividad.Text = "";
             btnExportar.Enabled = false;
             btnImprimir.Enabled = false;
+            btnListar.Enabled = false;
         }
 
         private void agregarLista()
@@ -298,6 +299,18 @@ namespace pryBazanIEFI
                 {
                     MessageBox.Show("No Record Found", "Info");
                 }
+            }
+        }
+
+        private void lstActividad_TextChanged(object sender, EventArgs e)
+        {
+            if (lstActividad.Text != string.Empty)
+            {
+                btnListar.Enabled = true;
+            }
+            else
+            {
+                btnListar.Enabled = false;
             }
         }
     }

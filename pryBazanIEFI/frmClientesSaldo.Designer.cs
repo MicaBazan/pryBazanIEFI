@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.lblListado = new System.Windows.Forms.Label();
             this.gbConsulta = new System.Windows.Forms.GroupBox();
             this.lblPromedio = new System.Windows.Forms.Label();
@@ -39,22 +40,32 @@
             this.lblCantidadDeClientes = new System.Windows.Forms.Label();
             this.lblTotaldeSaldos = new System.Windows.Forms.Label();
             this.dgvDuedas = new System.Windows.Forms.DataGridView();
-            this.picCerrar = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.gbConsulta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDuedas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenu
             // 
-            this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(228)))), ((int)(((byte)(152)))));
+            this.pnlMenu.BackColor = System.Drawing.Color.Silver;
             this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblListado);
             this.pnlMenu.Location = new System.Drawing.Point(-18, -14);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(773, 57);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // picCerrar
+            // 
+            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
+            this.picCerrar.Location = new System.Drawing.Point(552, 23);
+            this.picCerrar.Name = "picCerrar";
+            this.picCerrar.Size = new System.Drawing.Size(30, 22);
+            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCerrar.TabIndex = 2;
+            this.picCerrar.TabStop = false;
+            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
             // 
             // lblListado
             // 
@@ -110,12 +121,16 @@
             // 
             // btnListar
             // 
+            this.btnListar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(56)))), ((int)(((byte)(56)))));
+            this.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListar.ForeColor = System.Drawing.Color.White;
             this.btnListar.Location = new System.Drawing.Point(371, 373);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(161, 56);
             this.btnListar.TabIndex = 4;
             this.btnListar.Text = "Listar";
-            this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.UseVisualStyleBackColor = false;
             this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
             // lblTotal
@@ -157,17 +172,6 @@
             this.dgvDuedas.Size = new System.Drawing.Size(512, 159);
             this.dgvDuedas.TabIndex = 0;
             // 
-            // picCerrar
-            // 
-            this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
-            this.picCerrar.Location = new System.Drawing.Point(552, 23);
-            this.picCerrar.Name = "picCerrar";
-            this.picCerrar.Size = new System.Drawing.Size(30, 22);
-            this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCerrar.TabIndex = 2;
-            this.picCerrar.TabStop = false;
-            this.picCerrar.Click += new System.EventHandler(this.picCerrar_Click);
-            // 
             // frmClientesSaldo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -181,10 +185,10 @@
             this.Load += new System.EventHandler(this.frmClientesSaldo_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.gbConsulta.ResumeLayout(false);
             this.gbConsulta.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDuedas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();
             this.ResumeLayout(false);
 
         }
