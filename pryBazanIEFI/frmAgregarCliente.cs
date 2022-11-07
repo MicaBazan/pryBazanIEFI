@@ -56,7 +56,7 @@ namespace pryBazanIEFI
             //Verifica que no se agrege el mismo DNI 
             if(vecDni.Contains(codigo))
             {
-                MessageBox.Show("Verifique el numero de DNI", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Verifique el numero de DNI. Esta repetido", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 interfazInicial();
             }
             else
