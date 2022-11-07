@@ -73,7 +73,7 @@ namespace pryBazanIEFI
         private void frmConsultaUnCliente_Load(object sender, EventArgs e)
         {
             listarNombre();
-            lstNombre.Text = "";
+            lstNombre.SelectedIndex = -1;
         }
 
 

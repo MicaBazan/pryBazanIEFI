@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//Para imprimir
 using System.Drawing.Printing;
 using System.IO;
 using iTextSharp.text.pdf;
@@ -33,7 +34,7 @@ namespace pryBazanIEFI
         private void frmClientesActividad_Load(object sender, EventArgs e)
         {
             agregarLista();
-            lstActividad.Text = "";
+            lstActividad.SelectedIndex = -1;
             btnExportar.Enabled = false;
             btnImprimir.Enabled = false;
             btnListar.Enabled = false;
@@ -123,7 +124,7 @@ namespace pryBazanIEFI
                 
 
                 //Total saldos
-                int[] vecSaldo = new int[100];
+                int[] vecSaldo = new int[50];
                 int indice = 0;
 
                 string selectSaldo = "SELECT Saldo FROM Socio WHERE Codigo_Actividad=" + codActividad;

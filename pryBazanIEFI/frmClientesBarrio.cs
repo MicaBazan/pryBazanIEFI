@@ -75,6 +75,7 @@ namespace pryBazanIEFI
         private void frmClientesBarrio_Load(object sender, EventArgs e)
         {
             listarBarrio();
+            lstBarrio.SelectedIndex = -1;
         }
 
         private void picCerrar_Click(object sender, EventArgs e)

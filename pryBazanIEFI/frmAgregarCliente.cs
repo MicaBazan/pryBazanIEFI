@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Security.Policy;
 
 namespace pryBazanIEFI
 {
     public partial class frmAgregarCliente : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        int[] vecDni = new int[100];
         public frmAgregarCliente()
         {
             InitializeComponent();
@@ -22,8 +24,9 @@ namespace pryBazanIEFI
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
+            int indice = 0;
             string barrio = lstBarrio.Text;
-            string codigo = txtDni.Text;
+            int codigo = Convert.ToInt32(txtDni.Text);
             string actividad = lstActividad.Text;
 
             OleDbConnection conexion = new OleDbConnection(ruta);
@@ -32,71 +35,94 @@ namespace pryBazanIEFI
             string insert = "INSERT INTO Socio(Dni_Socio,Nombre_Apellido,Direccion,Codigo_Barrio,Codigo_Actividad,Saldo)" +
                 "VALUES(@Dni, @Nombre, @Direccion, @Barrio, @Actividad, @Saldo)";
 
-            OleDbCommand cmd = new OleDbCommand(insert, conexion);
-
-         
-            cmd.Parameters.AddWithValue("@Dni", txtDni.Text);
-            cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-            cmd.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
 
 
+            //Muevo los DNI a un vector
+            string selectDNI = "SELECT Dni_Socio FROM Socio";
+            OleDbCommand cmdDNI = new OleDbCommand(selectDNI, conexion);
 
+            OleDbDataReader objLector = cmdDNI.ExecuteReader();
 
-
-
-            //Busca el codigo de barrio
-            string selectBarrio = "SELECT * FROM Tabla_Barrio WHERE Nombre_Barrio='" + barrio + "'";
-
-            OleDbDataAdapter adapterBarrio = new OleDbDataAdapter(selectBarrio, conexion);
-
-            DataSet dtBarrio = new DataSet();
-
-            adapterBarrio.Fill(dtBarrio);
-
-
-            if (dtBarrio.Tables[0].Rows.Count == 0)
+            while(objLector.Read())
             {
-                dtBarrio.Dispose();
-                return;
+                vecDni[indice] = Convert.ToInt32(objLector[0]);
+                indice++;
+            }
+
+
+            //Verifica que no se agrege el mismo DNI 
+            if(vecDni.Contains(codigo))
+            {
+                MessageBox.Show("Verifique el numero de DNI", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                interfazInicial();
             }
             else
             {
-                cmd.Parameters.AddWithValue("@Barrio", (dtBarrio.Tables[0].Rows[0]["Codigo_Barrio"].ToString()));
-                dtBarrio.Dispose();
+
+
+                OleDbCommand cmd = new OleDbCommand(insert, conexion);
+
+
+                cmd.Parameters.AddWithValue("@Dni", txtDni.Text);
+                cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
+
+
+
+
+                //Busca el codigo de barrio
+                string selectBarrio = "SELECT * FROM Tabla_Barrio WHERE Nombre_Barrio='" + barrio + "'";
+
+                OleDbDataAdapter adapterBarrio = new OleDbDataAdapter(selectBarrio, conexion);
+
+                DataSet dtBarrio = new DataSet();
+
+                adapterBarrio.Fill(dtBarrio);
+
+
+                if (dtBarrio.Tables[0].Rows.Count == 0)
+                {
+                    dtBarrio.Dispose();
+                    return;
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Barrio", (dtBarrio.Tables[0].Rows[0]["Codigo_Barrio"].ToString()));
+                    dtBarrio.Dispose();
+                }
+
+
+
+                //Busca el código de actividad
+                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
+
+                OleDbDataAdapter adapterActividad = new OleDbDataAdapter(selectactividad, conexion);
+
+                DataSet dtActividad = new DataSet();
+
+                adapterActividad.Fill(dtActividad);
+
+                if (dtActividad.Tables[0].Rows.Count == 0)
+                {
+                    dtActividad.Dispose();
+                    return;
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Actividad", (dtActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString()));
+                }
+
+
+                cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
+
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Socio registrado", "Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                limpiar();
             }
 
 
-
-            //Busca el código de actividad
-            string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
-
-            OleDbDataAdapter adapterActividad = new OleDbDataAdapter(selectactividad, conexion);
-
-            DataSet dtActividad = new DataSet();
-
-            adapterActividad.Fill(dtActividad);
-
-            if (dtActividad.Tables[0].Rows.Count == 0)
-            {
-                dtActividad.Dispose();
-                return;
-            }
-            else
-            {
-                cmd.Parameters.AddWithValue("@Actividad", (dtActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString()));
-            }
-
-
-
-            cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
-
-            cmd.ExecuteNonQuery();
-
-            MessageBox.Show("Socio registrado", "Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            limpiar();
-          
             conexion.Close();
-            
 
         }
 
@@ -150,8 +176,7 @@ namespace pryBazanIEFI
             
             agregarListas();
             interfazInicial();
-            txtDni.Focus();
-            
+            txtDni.Focus();   
         }
 
 
@@ -160,9 +185,9 @@ namespace pryBazanIEFI
             txtDni.Text = "";
             txtNombre.Text = "";
             txtDireccion.Text = "";
-            lstBarrio.Text = "";
-            lstActividad.Text = "";
             txtSaldo.Text = "";
+            lstBarrio.SelectedIndex = -1;
+            lstActividad.SelectedIndex = -1;
 
             txtDni.Focus();
         }
@@ -179,11 +204,6 @@ namespace pryBazanIEFI
             {
                 btnCargar.Enabled = false;
             }
-        }
-
-        private void txtDni_TextChanged(object sender, EventArgs e)
-        {
-            validar();
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
@@ -233,6 +253,11 @@ namespace pryBazanIEFI
             {
                 e.Handled = true;
             }
+        }
+
+        private void txtDni_TextChanged_1(object sender, EventArgs e)
+        {
+            validar();
         }
     }
 }
