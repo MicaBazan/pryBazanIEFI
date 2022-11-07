@@ -28,6 +28,9 @@ namespace pryBazanIEFI
             string barrio = lstBarrio.Text;
             int codigo = Convert.ToInt32(txtDni.Text);
             string actividad = lstActividad.Text;
+            string nombre = txtNombre.Text;
+            string direccion = txtDireccion.Text;
+            string saldo = txtSaldo.Text;
 
             OleDbConnection conexion = new OleDbConnection(ruta);
             conexion.Open();
@@ -63,9 +66,9 @@ namespace pryBazanIEFI
                 OleDbCommand cmd = new OleDbCommand(insert, conexion);
 
 
-                cmd.Parameters.AddWithValue("@Dni", txtDni.Text);
-                cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-                cmd.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
+                cmd.Parameters.AddWithValue("@Dni", codigo);
+                cmd.Parameters.AddWithValue("@Nombre", nombre);
+                cmd.Parameters.AddWithValue("@Direccion", direccion);
 
 
 
@@ -113,7 +116,7 @@ namespace pryBazanIEFI
                 }
 
 
-                cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
+                cmd.Parameters.AddWithValue("@Saldo", saldo);
 
                 cmd.ExecuteNonQuery();
 
