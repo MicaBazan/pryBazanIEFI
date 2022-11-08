@@ -288,6 +288,7 @@ namespace pryBazanIEFI
 
             interfaz_Inicial();
             txtCodigo.Text = "";
+            limpiar();
 
         }
 
