@@ -14,6 +14,7 @@ namespace pryBazanIEFI
     public partial class frmClientesBarrio : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        OleDbConnection conexion = new OleDbConnection();
         public frmClientesBarrio()
         {
             InitializeComponent();
@@ -24,7 +25,7 @@ namespace pryBazanIEFI
             string barrio = lstBarrio.Text;
             string codBarrio;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             conexion.Open();
 
             //Buscar Código Barrio
@@ -58,18 +59,18 @@ namespace pryBazanIEFI
 
         private void listarBarrio()
         {
-            OleDbConnection conexionBarrio = new OleDbConnection(ruta);
-            conexionBarrio.Open();
+            conexion.ConnectionString = ruta;
+            conexion.Open();
             DataTable tablaBarrio = new DataTable();
             string selectBarrio = "Select * From Tabla_Barrio";
-            OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexionBarrio);
+            OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexion);
             OleDbDataAdapter daBarrio = new OleDbDataAdapter(cmdBarrio);
             daBarrio.SelectCommand = cmdBarrio;
             daBarrio.Fill(tablaBarrio);
             lstBarrio.DisplayMember = "Nombre_Barrio";
             lstBarrio.ValueMember = "Codigo_Barrio";
             lstBarrio.DataSource = tablaBarrio;
-            conexionBarrio.Close();
+            conexion.Close();
         }
 
         private void frmClientesBarrio_Load(object sender, EventArgs e)

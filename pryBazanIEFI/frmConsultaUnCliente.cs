@@ -14,6 +14,7 @@ namespace pryBazanIEFI
     public partial class frmConsultaUnCliente : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        OleDbConnection conexion = new OleDbConnection();
 
         public frmConsultaUnCliente()
         {
@@ -24,7 +25,7 @@ namespace pryBazanIEFI
         {
             string nombre = lstNombre.Text;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
 
             string select = "SELECT * FROM Socio WHERE Nombre_Apellido='" + nombre + "'";
 
@@ -56,18 +57,20 @@ namespace pryBazanIEFI
 
         private void listarNombre()
         {
-            OleDbConnection conexion = new OleDbConnection(ruta);
-            conexion.Open();
+            conexion.ConnectionString = ruta;
+            
             DataTable dt = new DataTable();
             string selectBarrio = "Select * From Socio";
             OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexion);
             OleDbDataAdapter daBarrio = new OleDbDataAdapter(cmdBarrio);
             daBarrio.SelectCommand = cmdBarrio;
+            conexion.Open();
             daBarrio.Fill(dt);
+            conexion.Close();
             lstNombre.DisplayMember = "Nombre_Apellido";
             lstNombre.ValueMember = "Dni_Socio";
             lstNombre.DataSource = dt;
-            conexion.Close();
+            
         }
 
         private void frmConsultaUnCliente_Load(object sender, EventArgs e)
@@ -86,7 +89,7 @@ namespace pryBazanIEFI
         {
             string actividad = lblActividad.Text;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             string cadenaActividad = "Select * From Actividad Where Codigo_Actividad=" + Convert.ToString(actividad);
             OleDbDataAdapter adaptadorActividad = new OleDbDataAdapter(cadenaActividad, conexion);
             DataSet dataSetActividad = new DataSet();

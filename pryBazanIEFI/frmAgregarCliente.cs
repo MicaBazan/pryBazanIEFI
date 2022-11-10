@@ -17,6 +17,7 @@ namespace pryBazanIEFI
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
         int[] vecDni = new int[100];
+        OleDbConnection conexion = new OleDbConnection();
         public frmAgregarCliente()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace pryBazanIEFI
             string direccion = txtDireccion.Text;
             string saldo = txtSaldo.Text;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             conexion.Open();
 
             string insert = "INSERT INTO Socio(Dni_Socio,Nombre_Apellido,Direccion,Codigo_Barrio,Codigo_Actividad,Saldo)" +
@@ -146,32 +147,29 @@ namespace pryBazanIEFI
 
         private void agregarListas()
         {
-            OleDbConnection conexionBarrio = new OleDbConnection(ruta);
-            conexionBarrio.Open();
+            conexion.ConnectionString = ruta;
+            conexion.Open();
             DataTable tablaBarrio = new DataTable();
             string selectBarrio = "Select * From Tabla_Barrio";
-            OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexionBarrio);
+            OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexion);
             OleDbDataAdapter daBarrio = new OleDbDataAdapter(cmdBarrio);
             daBarrio.SelectCommand = cmdBarrio;
             daBarrio.Fill(tablaBarrio);
             lstBarrio.DisplayMember = "Nombre_Barrio";
             lstBarrio.ValueMember = "Codigo_Barrio";
             lstBarrio.DataSource = tablaBarrio;
-            conexionBarrio.Close();
 
-
-            OleDbConnection conexionActividad = new OleDbConnection(ruta);
-            conexionActividad.Open();
+;
             DataTable tablaActividad = new DataTable();
             string selectActividad = "Select * From Actividad";
-            OleDbCommand cmdActividad = new OleDbCommand(selectActividad, conexionActividad);
+            OleDbCommand cmdActividad = new OleDbCommand(selectActividad, conexion);
             OleDbDataAdapter daActividad = new OleDbDataAdapter(cmdActividad);
             daActividad.SelectCommand = cmdActividad;
             daActividad.Fill(tablaActividad);
             lstActividad.DisplayMember = "Detalle";
             lstActividad.ValueMember = "Codigo_Actividad";
             lstActividad.DataSource = tablaActividad;
-            conexionActividad.Close();
+            conexion.Close();
         }
 
         private void frmAgregarCliente_Load(object sender, EventArgs e)

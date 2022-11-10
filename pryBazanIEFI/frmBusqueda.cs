@@ -15,6 +15,7 @@ namespace pryBazanIEFI
     public partial class frmBusqueda : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        OleDbConnection conexion = new OleDbConnection();
 
         public frmBusqueda()
         {
@@ -30,9 +31,9 @@ namespace pryBazanIEFI
         {
             string codigo = txtCodigo.Text;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
-
             string cadenaGimnasio = "Select * From Socio Where Dni_Socio=" + codigo;
+
+            conexion.ConnectionString = ruta;
 
             OleDbDataAdapter adaptadorGimnasio = new OleDbDataAdapter(cadenaGimnasio, conexion);
 
@@ -78,7 +79,7 @@ namespace pryBazanIEFI
         {
             string barrio = Convert.ToString(lstBarrio.Text);
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             string cadenaBarrio = "Select * From Tabla_Barrio Where Codigo_Barrio=" + barrio;
             OleDbDataAdapter adaptadorBarrio = new OleDbDataAdapter(cadenaBarrio, conexion);
             DataSet dataSetBarrio = new DataSet();
@@ -103,7 +104,7 @@ namespace pryBazanIEFI
         {
             string actividad = lstActividad.Text;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             string cadenaActividad = "Select * From Actividad Where Codigo_Actividad=" + Convert.ToString(actividad);
             OleDbDataAdapter adaptadorActividad = new OleDbDataAdapter(cadenaActividad, conexion);
             DataSet dataSetActividad = new DataSet();
@@ -126,32 +127,33 @@ namespace pryBazanIEFI
 
         private void agregarListas()
         {
-            OleDbConnection conexionBarrio = new OleDbConnection(ruta);
-            conexionBarrio.Open();
+            conexion.ConnectionString = ruta;
+            conexion.Open();
+
+            //Agregar listas barrio
             DataTable tablaBarrio = new DataTable();
             string selectBarrio = "Select * From Tabla_Barrio";
-            OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexionBarrio);
+            OleDbCommand cmdBarrio = new OleDbCommand(selectBarrio, conexion);
             OleDbDataAdapter daBarrio = new OleDbDataAdapter(cmdBarrio);
             daBarrio.SelectCommand = cmdBarrio;
             daBarrio.Fill(tablaBarrio);
             lstBarrio.DisplayMember = "Nombre_Barrio";
             lstBarrio.ValueMember = "Codigo_Barrio";
             lstBarrio.DataSource = tablaBarrio;
-            conexionBarrio.Close();
+            
 
-
-            OleDbConnection conexionActividad = new OleDbConnection(ruta);
-            conexionActividad.Open();
+            //Agregar listas actividad
             DataTable tablaActividad = new DataTable();
             string selectActividad = "Select * From Actividad";
-            OleDbCommand cmdActividad = new OleDbCommand(selectActividad, conexionActividad);
+            OleDbCommand cmdActividad = new OleDbCommand(selectActividad, conexion);
             OleDbDataAdapter daActividad = new OleDbDataAdapter(cmdActividad);
             daActividad.SelectCommand = cmdActividad;
             daActividad.Fill(tablaActividad);
             lstActividad.DisplayMember = "Detalle";
             lstActividad.ValueMember = "Codigo_Actividad";
             lstActividad.DataSource = tablaActividad;
-            conexionActividad.Close();
+
+            conexion.Close();
         }
 
 
@@ -214,9 +216,9 @@ namespace pryBazanIEFI
             string barrio = lstBarrio.Text;
             string actividad = lstActividad.Text;
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             string update = "UPDATE Socio SET Nombre_Apellido=@Nombre,Direccion=@Direccion,Codigo_Barrio=@Barrio,Codigo_Actividad=@Actividad,Saldo=@Saldo WHERE Dni_Socio=@Codigo";
-            
+
 
             try
             {
@@ -234,7 +236,9 @@ namespace pryBazanIEFI
 
                 DataSet dtBarrio = new DataSet();
 
+                conexion.Open();
                 adapterBarrio.Fill(dtBarrio);
+                conexion.Close();
 
 
                 if (dtBarrio.Tables[0].Rows.Count == 0)
@@ -283,7 +287,6 @@ namespace pryBazanIEFI
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                conexion.Close();
             }
 
             interfaz_Inicial();

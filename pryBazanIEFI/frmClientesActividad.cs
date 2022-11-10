@@ -25,6 +25,7 @@ namespace pryBazanIEFI
     public partial class frmClientesActividad : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        OleDbConnection conexion = new OleDbConnection();
 
         public frmClientesActividad()
         {
@@ -42,18 +43,18 @@ namespace pryBazanIEFI
 
         private void agregarLista()
         {
-            OleDbConnection conexionActividad = new OleDbConnection(ruta);
-            conexionActividad.Open();
+            conexion.ConnectionString = ruta;
+            conexion.Open();
             DataTable tablaActividad = new DataTable();
             string selectActividad = "Select * From Actividad";
-            OleDbCommand cmdActividad = new OleDbCommand(selectActividad, conexionActividad);
+            OleDbCommand cmdActividad = new OleDbCommand(selectActividad, conexion);
             OleDbDataAdapter daActividad = new OleDbDataAdapter(cmdActividad);
             daActividad.SelectCommand = cmdActividad;
             daActividad.Fill(tablaActividad);
             lstActividad.DisplayMember = "Detalle";
             lstActividad.ValueMember = "Codigo_Actividad";
             lstActividad.DataSource = tablaActividad;
-            conexionActividad.Close();
+            conexion.Close();
         }
 
         private void btnListar_Click(object sender, EventArgs e)
@@ -63,10 +64,9 @@ namespace pryBazanIEFI
             string codActividad;
             
             string promedio;
-            
 
 
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
             conexion.Open();
 
 

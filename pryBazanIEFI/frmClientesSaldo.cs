@@ -14,6 +14,7 @@ namespace pryBazanIEFI
     public partial class frmClientesSaldo : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
+        OleDbConnection conexion = new OleDbConnection();
 
         public frmClientesSaldo()
         {
@@ -40,7 +41,7 @@ namespace pryBazanIEFI
 
         private void listar()
         {
-            OleDbConnection conexion = new OleDbConnection(ruta);
+            conexion.ConnectionString = ruta;
 
             conexion.Open();
 
