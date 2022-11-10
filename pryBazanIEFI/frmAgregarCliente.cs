@@ -23,9 +23,30 @@ namespace pryBazanIEFI
             InitializeComponent();
         }
 
-        private void btnCargar_Click(object sender, EventArgs e)
+        private void moverVector()
         {
             int indice = 0;
+            conexion.ConnectionString = ruta;
+
+            //Muevo los DNI a un vector
+            string selectDNI = "SELECT Dni_Socio FROM Socio";
+            OleDbCommand cmdDNI = new OleDbCommand(selectDNI, conexion);
+
+            conexion.Open();
+
+            OleDbDataReader objLector = cmdDNI.ExecuteReader();
+
+            while (objLector.Read())
+            {
+                vecDni[indice] = Convert.ToInt32(objLector[0]);
+                indice++;
+            }
+
+            conexion.Close();
+        }
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
+            
             string barrio = lstBarrio.Text;
             int codigo = Convert.ToInt32(txtDni.Text);
             string actividad = lstActividad.Text;
@@ -39,19 +60,6 @@ namespace pryBazanIEFI
             string insert = "INSERT INTO Socio(Dni_Socio,Nombre_Apellido,Direccion,Codigo_Barrio,Codigo_Actividad,Saldo)" +
                 "VALUES(@Dni, @Nombre, @Direccion, @Barrio, @Actividad, @Saldo)";
 
-
-
-            //Muevo los DNI a un vector
-            string selectDNI = "SELECT Dni_Socio FROM Socio";
-            OleDbCommand cmdDNI = new OleDbCommand(selectDNI, conexion);
-
-            OleDbDataReader objLector = cmdDNI.ExecuteReader();
-
-            while(objLector.Read())
-            {
-                vecDni[indice] = Convert.ToInt32(objLector[0]);
-                indice++;
-            }
 
 
             //Verifica que no se agrege el mismo DNI 
@@ -177,7 +185,8 @@ namespace pryBazanIEFI
             
             agregarListas();
             interfazInicial();
-            txtDni.Focus();   
+            txtDni.Focus();
+            moverVector();
         }
 
 
