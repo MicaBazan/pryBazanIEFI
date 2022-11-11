@@ -39,11 +39,7 @@ namespace pryBazanIEFI
 
             DataSet dataSetGimnasio = new DataSet();
 
-            
-
             adaptadorGimnasio.Fill(dataSetGimnasio);
-
-            
 
 
             if (dataSetGimnasio.Tables[0].Rows.Count == 0)
@@ -77,27 +73,23 @@ namespace pryBazanIEFI
 
         private void buscarBarrio()
         {
-            string barrio = Convert.ToString(lstBarrio.Text);
+            string barrio = lstBarrio.Text;
 
             conexion.ConnectionString = ruta;
-            string cadenaBarrio = "Select * From Tabla_Barrio Where Codigo_Barrio=" + barrio;
-            OleDbDataAdapter adaptadorBarrio = new OleDbDataAdapter(cadenaBarrio, conexion);
-            DataSet dataSetBarrio = new DataSet();
-            conexion.Open();
-            adaptadorBarrio.Fill(dataSetBarrio);
-            conexion.Close();
+            string cadenaBarrio = "Select * From Tabla_Barrio";
 
-            if(dataSetBarrio.Tables[0].Rows.Count == 0)
+            conexion.Open();
+            OleDbCommand commandBarrio = new OleDbCommand(cadenaBarrio, conexion);
+            OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
+
+            while(lectorBarrio.Read())
             {
-                dataSetBarrio.Dispose();
-                return;
+                if (Convert.ToString(lectorBarrio["Codigo_Barrio"]) == barrio)
+                {
+                    lstBarrio.Text = Convert.ToString(lectorBarrio["Nombre_Barrio"]);
+                }
             }
-            else
-            {
-                lstBarrio.Text = dataSetBarrio.Tables[0].Rows[0]["Nombre_Barrio"].ToString();
-                dataSetBarrio.Dispose();
-                return;
-            }
+            conexion.Close();
         }
 
         private void buscarActividad()
@@ -105,24 +97,20 @@ namespace pryBazanIEFI
             string actividad = lstActividad.Text;
 
             conexion.ConnectionString = ruta;
-            string cadenaActividad = "Select * From Actividad Where Codigo_Actividad=" + Convert.ToString(actividad);
-            OleDbDataAdapter adaptadorActividad = new OleDbDataAdapter(cadenaActividad, conexion);
-            DataSet dataSetActividad = new DataSet();
-            conexion.Open();
-            adaptadorActividad.Fill(dataSetActividad);
-            conexion.Close();
+            string cadenaActividad = "Select * From Actividad";
 
-            if(dataSetActividad.Tables[0].Rows.Count == 0)
+            conexion.Open();
+            OleDbCommand commandActividad = new OleDbCommand(cadenaActividad, conexion);
+            OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
+
+            while (lectorActividad.Read())
             {
-                dataSetActividad.Dispose();
-                return;
+                if (Convert.ToString(lectorActividad["Codigo_Actividad"]) == actividad)
+                {
+                    lstActividad.Text = Convert.ToString(lectorActividad["Detalle"]);
+                }
             }
-            else
-            {
-                lstActividad.Text = dataSetActividad.Tables[0].Rows[0]["Detalle"].ToString();
-                dataSetActividad.Dispose();
-                return;
-            }
+            conexion.Close();
         }
 
         private void agregarListas()
@@ -214,23 +202,21 @@ namespace pryBazanIEFI
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string dni = txtCodigo.Text;
+            string nombre = txtNombre.Text;
+            string direccion = txtDireccion.Text;
             string barrio = lstBarrio.Text;
             string actividad = lstActividad.Text;
+            string saldo = txtSaldo.Text;
 
             conexion.ConnectionString = ruta;
             string update = "UPDATE Socio SET Nombre_Apellido=@Nombre,Direccion=@Direccion,Codigo_Barrio=@Barrio,Codigo_Actividad=@Actividad,Saldo=@Saldo WHERE Dni_Socio=@Codigo";
 
-
             try
             {
-                
                 OleDbCommand command = new OleDbCommand(update, conexion);
 
-                //OleDbDataReader lector = dataAdapter.Container();
-
-                command.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-                command.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
-
+                command.Parameters.AddWithValue("@Nombre", nombre);
+                command.Parameters.AddWithValue("@Direccion", direccion);
 
                 //Buscar código barrio
                 string selectBarrio = "Select * From Tabla_Barrio Where Nombre_Barrio='" + barrio + "'";
@@ -255,26 +241,22 @@ namespace pryBazanIEFI
 
                 while(lectorActividad.Read())
                 {
-
                     if (Convert.ToString(lectorActividad["Detalle"]) == actividad)
                     {
                         command.Parameters.AddWithValue("@Actividad", lectorActividad["Codigo_Actividad"]);              
                     }
-
                 }
 
                 conexion.Close();
 
-
-                command.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
-                command.Parameters.AddWithValue("@Codigo", txtCodigo.Text);
+                command.Parameters.AddWithValue("@Saldo", saldo);
+                command.Parameters.AddWithValue("@Codigo", dni);
                 command.Connection.Open();
                 command.ExecuteNonQuery();
                 command.Connection.Close();
 
                 MessageBox.Show("Registro Actualizado Existosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-                
+               
             }
             catch(Exception ex)
             {
