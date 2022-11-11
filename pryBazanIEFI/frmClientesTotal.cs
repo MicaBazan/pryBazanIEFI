@@ -28,19 +28,25 @@ namespace pryBazanIEFI
                 conexion.ConnectionString = ruta;
                 conexion.Open();
 
-                DataTable dt = new DataTable();
-
-                string select = @"SELECT Dni_Socio, Nombre_Apellido FROM Socio";
-
+                string select = @"SELECT * FROM Socio";
                 OleDbCommand cmd = new OleDbCommand(select, conexion);
+                OleDbDataReader reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Dni_Socio");
+                dt.Columns.Add("Nombre_Apellido");
 
-                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-
-                da.SelectCommand = cmd;
-
-                da.Fill(dt);
+                while(reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["Dni_Socio"] = reader["Dni_Socio"];
+                    row["Nombre_Apellido"] = reader["Nombre_Apellido"];
+                    dt.Rows.Add(row);
+                }
 
                 dgvClientes.DataSource = dt;
+
+                conexion.Close();
+                return;
             }
             catch(Exception ex)
             {

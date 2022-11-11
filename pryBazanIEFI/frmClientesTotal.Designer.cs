@@ -51,7 +51,7 @@
             // picCerrar
             // 
             this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
-            this.picCerrar.Location = new System.Drawing.Point(768, 22);
+            this.picCerrar.Location = new System.Drawing.Point(364, 22);
             this.picCerrar.Name = "picCerrar";
             this.picCerrar.Size = new System.Drawing.Size(30, 22);
             this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -76,7 +76,7 @@
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.RowTemplate.Height = 24;
-            this.dgvClientes.Size = new System.Drawing.Size(776, 297);
+            this.dgvClientes.Size = new System.Drawing.Size(372, 297);
             this.dgvClientes.TabIndex = 1;
             // 
             // btnListar
@@ -85,7 +85,7 @@
             this.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListar.ForeColor = System.Drawing.Color.White;
-            this.btnListar.Location = new System.Drawing.Point(649, 376);
+            this.btnListar.Location = new System.Drawing.Point(245, 376);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(139, 62);
             this.btnListar.TabIndex = 2;
@@ -97,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(395, 450);
             this.Controls.Add(this.btnListar);
             this.Controls.Add(this.dgvClientes);
             this.Controls.Add(this.pnlMenu);

@@ -23,26 +23,25 @@ namespace pryBazanIEFI
         private void btnListar_Click(object sender, EventArgs e)
         {
             string barrio = lstBarrio.Text;
-            string codBarrio;
+            string codBarrio = null;
 
             conexion.ConnectionString = ruta;
             conexion.Open();
 
             //Buscar Código Barrio
-            string selectBarrio = "SELECT * FROM Tabla_Barrio WHERE Nombre_Barrio='" + barrio + "'";
-            OleDbDataAdapter daBarrio = new OleDbDataAdapter(selectBarrio, conexion);
-            DataSet dsBarrio = new DataSet();
-            daBarrio.Fill(dsBarrio);
+            string selectBarrio = "SELECT * FROM Tabla_Barrio";
 
-            if (dsBarrio.Tables[0].Rows.Count == 0)
+            OleDbCommand commandBarrio = new OleDbCommand(selectBarrio, conexion);
+            OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
+
+            while(lectorBarrio.Read())
             {
-                dsBarrio.Dispose();
-                return;
+                if (Convert.ToString(lectorBarrio["Nombre_Barrio"]) == barrio)
+                {
+                    codBarrio = Convert.ToString(lectorBarrio["Codigo_Barrio"]);
+                }
             }
-            else
-            {
-                codBarrio = dsBarrio.Tables[0].Rows[0]["Codigo_Barrio"].ToString();
-            }
+
 
             //Mover a la Grilla
             DataTable dt = new DataTable();

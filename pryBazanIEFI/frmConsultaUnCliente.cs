@@ -27,32 +27,23 @@ namespace pryBazanIEFI
 
             conexion.ConnectionString = ruta;
 
-            string select = "SELECT * FROM Socio WHERE Nombre_Apellido='" + nombre + "'";
-
-            OleDbDataAdapter da = new OleDbDataAdapter(select, conexion);
-
-            DataSet ds = new DataSet();
+            string select = "SELECT * FROM Socio";
 
             conexion.Open();
+            OleDbCommand cmd = new OleDbCommand(select, conexion);
+            OleDbDataReader reader = cmd.ExecuteReader();
 
-            da.Fill(ds);
+            while(reader.Read())
+            {
+                if (Convert.ToString(reader["Nombre_Apellido"]) == nombre)
+                {
+                    lblActividad.Text = Convert.ToString(reader["Codigo_Actividad"]);
+                    buscarActividad();
+                    lblSaldo.Text = Convert.ToString(reader["Saldo"]);
+                }
+            }
 
             conexion.Close();
-
-            if (ds.Tables[0].Rows.Count == 0)
-            {
-                ds.Dispose();
-                return;
-            }
-            else
-            {
-                lblActividad.Text = ds.Tables[0].Rows[0]["Codigo_Actividad"].ToString();
-                buscarActividad();
-                lblSaldo.Text = ds.Tables[0].Rows[0]["Saldo"].ToString();
-                ds.Dispose();
-
-                return;
-            }
         }
 
         private void listarNombre()
@@ -88,25 +79,17 @@ namespace pryBazanIEFI
         private void buscarActividad()
         {
             string actividad = lblActividad.Text;
+            string cadenaActividad = "Select * From Actividad";
 
-            conexion.ConnectionString = ruta;
-            string cadenaActividad = "Select * From Actividad Where Codigo_Actividad=" + Convert.ToString(actividad);
-            OleDbDataAdapter adaptadorActividad = new OleDbDataAdapter(cadenaActividad, conexion);
-            DataSet dataSetActividad = new DataSet();
-            conexion.Open();
-            adaptadorActividad.Fill(dataSetActividad);
-            conexion.Close();
+            OleDbCommand commandActividad = new OleDbCommand(cadenaActividad, conexion);
+            OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
 
-            if (dataSetActividad.Tables[0].Rows.Count == 0)
+            while (lectorActividad.Read())
             {
-                dataSetActividad.Dispose();
-                return;
-            }
-            else
-            {
-                lblActividad.Text = dataSetActividad.Tables[0].Rows[0]["Detalle"].ToString();
-                dataSetActividad.Dispose();
-                return;
+                if (Convert.ToString(lectorActividad["Codigo_Actividad"]) == actividad)
+                {
+                    lblActividad.Text = Convert.ToString(lectorActividad["Detalle"]);
+                }
             }
         }
     }
