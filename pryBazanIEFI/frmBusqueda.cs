@@ -39,11 +39,11 @@ namespace pryBazanIEFI
 
             DataSet dataSetGimnasio = new DataSet();
 
-            conexion.Open();
+            
 
             adaptadorGimnasio.Fill(dataSetGimnasio);
 
-            conexion.Close();
+            
 
 
             if (dataSetGimnasio.Tables[0].Rows.Count == 0)
@@ -213,6 +213,7 @@ namespace pryBazanIEFI
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string dni = txtCodigo.Text;
             string barrio = lstBarrio.Text;
             string actividad = lstActividad.Text;
 
@@ -222,66 +223,57 @@ namespace pryBazanIEFI
 
             try
             {
-                OleDbCommand cmd = new OleDbCommand(update, conexion);
+                
+                OleDbCommand command = new OleDbCommand(update, conexion);
 
-                cmd.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-                cmd.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
+                //OleDbDataReader lector = dataAdapter.Container();
+
+                command.Parameters.AddWithValue("@Nombre", txtNombre.Text);
+                command.Parameters.AddWithValue("@Direccion", txtDireccion.Text);
 
 
-
-                //Buscar código Barrio
+                //Buscar código barrio
                 string selectBarrio = "Select * From Tabla_Barrio Where Nombre_Barrio='" + barrio + "'";
 
-                OleDbDataAdapter adapterBarrio = new OleDbDataAdapter(selectBarrio, conexion);
-
-                DataSet dtBarrio = new DataSet();
-
                 conexion.Open();
-                adapterBarrio.Fill(dtBarrio);
+                OleDbCommand commandBarrio = new OleDbCommand(selectBarrio, conexion);
+                OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
+
+                while(lectorBarrio.Read())
+                {
+                    if (Convert.ToString(lectorBarrio["Nombre_Barrio"]) == barrio)
+                    {
+                        command.Parameters.AddWithValue("@Barrio", lectorBarrio["Codigo_Barrio"]);
+                    }
+                }
+
+                //Buscar código actividad
+                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
+
+                OleDbCommand commandActividad = new OleDbCommand(selectactividad, conexion);
+                OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
+
+                while(lectorActividad.Read())
+                {
+
+                    if (Convert.ToString(lectorActividad["Detalle"]) == actividad)
+                    {
+                        command.Parameters.AddWithValue("@Actividad", lectorActividad["Codigo_Actividad"]);              
+                    }
+
+                }
+
                 conexion.Close();
 
 
-                if (dtBarrio.Tables[0].Rows.Count == 0)
-                {
-                    dtBarrio.Dispose();
-                    return;
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@Barrio", (dtBarrio.Tables[0].Rows[0]["Codigo_Barrio"].ToString()));
-                    dtBarrio.Dispose();
-                }
+                command.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
+                command.Parameters.AddWithValue("@Codigo", txtCodigo.Text);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+                command.Connection.Close();
 
-
-
-
-                //Buscar código Actividad
-                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
-
-                OleDbDataAdapter adapterActividad = new OleDbDataAdapter(selectactividad, conexion);
-
-                DataSet dtActividad = new DataSet();
-
-                adapterActividad.Fill(dtActividad);
-
-                if (dtActividad.Tables[0].Rows.Count == 0)
-                {
-                    dtActividad.Dispose();
-                    return;
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@Actividad", (dtActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString()));
-                }
-
-
-                cmd.Parameters.AddWithValue("@Saldo", txtSaldo.Text);
-
-                cmd.Parameters.AddWithValue("@Codigo", txtCodigo.Text);
-                cmd.Connection.Open();
-                cmd.ExecuteNonQuery();
-                cmd.Connection.Close();
                 MessageBox.Show("Registro Actualizado Existosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
                 
             }
             catch(Exception ex)

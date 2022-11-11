@@ -114,6 +114,11 @@ namespace pryBazanIEFI
 
                 adapterActividad.Fill(dtActividad);
 
+                //while(adapterActividad.)
+                //{
+
+                //}
+
                 if (dtActividad.Tables[0].Rows.Count == 0)
                 {
                     dtActividad.Dispose();
