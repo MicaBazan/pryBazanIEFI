@@ -11,6 +11,7 @@ using System.Windows.Forms;
 //Para imprimir
 using System.Drawing.Printing;
 using System.IO;
+//Para exportar
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using Font = System.Drawing.Font;
@@ -61,67 +62,39 @@ namespace pryBazanIEFI
         {
             
             string actividad = lstActividad.Text;
-            string codActividad;
-            
+            string codActividad = null;
             string promedio;
-
+            int mayor = 0;
+            int menor = 0;
 
             conexion.ConnectionString = ruta;
             conexion.Open();
 
-
-
             try
             {
-
                 //Buscar código actividad
-                string selectActividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
-                OleDbDataAdapter daActividad = new OleDbDataAdapter(selectActividad, conexion);
-                DataSet dsActividad = new DataSet();
-                daActividad.Fill(dsActividad);
+                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
 
-                if (dsActividad.Tables[0].Rows.Count == 0)
+                OleDbCommand commandActividad = new OleDbCommand(selectactividad, conexion);
+                OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
+
+                while (lectorActividad.Read())
                 {
-                    dsActividad.Dispose();
-                    return;
+                    if (Convert.ToString(lectorActividad["Detalle"]) == actividad)
+                    {
+                        codActividad = Convert.ToString(lectorActividad["Codigo_Actividad"]);
+                    }
                 }
-                else
-                {
-                    codActividad = dsActividad.Tables[0].Rows[0]["Codigo_Actividad"].ToString();
-                }
-
-
+                
 
                 //Mover a la grilla
                 DataTable dt = new DataTable();
                 string selectdgv = "SELECT Dni_Socio, Nombre_Apellido FROM Socio WHERE Codigo_Actividad=" + codActividad;
                 OleDbCommand cmd = new OleDbCommand(selectdgv, conexion);
-                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-                da.SelectCommand = cmd;
-                da.Fill(dt);
+                OleDbDataReader lector = cmd.ExecuteReader();
+                dt.Load(lector);
                 dgvClientes.DataSource = dt;
 
-
-
-
-                //Busca Mayor
-                string selectMayor = "SELECT MAX(Saldo) AS ValorMaximo FROM Socio Where Codigo_Actividad=" + codActividad;
-                OleDbCommand cmdMayor = new OleDbCommand(selectMayor, conexion);
-                OleDbDataAdapter daMayor = new OleDbDataAdapter(cmdMayor);
-
-                lblMayor.Text = Convert.ToString(cmdMayor.ExecuteScalar());
-              
-
-
-
-                //Buscar Menor   
-                string selectMenor = "SELECT MIN(Saldo) AS ValorMinimo FROM Socio WHERE Codigo_Actividad=" + codActividad;
-                OleDbCommand cmdMenor = new OleDbCommand(selectMenor, conexion);
-                OleDbDataAdapter daMenor = new OleDbDataAdapter(cmdMenor);
-
-                lblMenor.Text = Convert.ToString(cmdMenor.ExecuteScalar());
-                
-                
 
                 //Total saldos
                 int[] vecSaldo = new int[50];
@@ -142,24 +115,35 @@ namespace pryBazanIEFI
                 lblTotal.Text = suma.ToString();
 
 
+                //Busca Mayor y Menor
+                indice = 0;
+                while(indice <= 49)    
+                {
+                    if (vecSaldo[indice] > mayor)
+                    {
+                        mayor = vecSaldo[indice];
+                    }
 
+                    if (vecSaldo[indice] < menor)
+                    {
+                        menor = vecSaldo[indice];
+                    }
+                    indice++;
+                }
+                lblMayor.Text = mayor.ToString();
+                lblMenor.Text = menor.ToString();
 
 
                 //Sacar Promedio
                 int total = Convert.ToInt32(lblTotal.Text);
                 int cantidadRegistros = dgvClientes.Rows.Count;
 
-
                 promedio = Convert.ToString(total / cantidadRegistros);
                 lblPromedio.Text = promedio;
-
-
             }
             catch(Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
-
             }
 
 
