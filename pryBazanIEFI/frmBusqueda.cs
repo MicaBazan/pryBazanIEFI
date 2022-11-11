@@ -31,54 +31,46 @@ namespace pryBazanIEFI
         {
             string codigo = txtCodigo.Text;
 
-            string cadenaGimnasio = "Select * From Socio Where Dni_Socio=" + codigo;
+            string cadenaGimnasio = "Select * From Socio";
 
             conexion.ConnectionString = ruta;
 
-            OleDbDataAdapter adaptadorGimnasio = new OleDbDataAdapter(cadenaGimnasio, conexion);
+            conexion.Open();
 
-            DataSet dataSetGimnasio = new DataSet();
+            OleDbCommand command = new OleDbCommand(cadenaGimnasio, conexion);
+            OleDbDataReader reader = command.ExecuteReader();
 
-            adaptadorGimnasio.Fill(dataSetGimnasio);
-
-
-            if (dataSetGimnasio.Tables[0].Rows.Count == 0)
+            while(reader.Read())
             {
-                MessageBox.Show("Lo siento el código ingresado no existe", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCodigo.Text = "";
-                dataSetGimnasio.Dispose();
+                if(Convert.ToString(reader["Dni_Socio"]) == codigo)
+                {
+                    txtNombre.Text = Convert.ToString(reader["Nombre_Apellido"]);
+                    txtDireccion.Text = Convert.ToString(reader["Direccion"]);
+                    lstBarrio.Text = Convert.ToString(reader["Codigo_Barrio"]);
+                    buscarBarrio();
+                    lstActividad.Text = Convert.ToString(reader["Codigo_Actividad"]);
+                    buscarActividad();
+                    txtSaldo.Text = Convert.ToString(reader["Saldo"]);
 
-                btnEliminar.Enabled = false;
-                btnModificar.Enabled = false;
-
-                return;
+                    btnEliminar.Enabled = true;
+                    btnModificar.Enabled = true;
+                }  
             }
-            else
-            {
-                txtNombre.Text = dataSetGimnasio.Tables[0].Rows[0]["Nombre_Apellido"].ToString();
-                txtDireccion.Text = dataSetGimnasio.Tables[0].Rows[0]["Direccion"].ToString();
-                lstBarrio.Text = dataSetGimnasio.Tables[0].Rows[0]["Codigo_Barrio"].ToString();
-                buscarBarrio();
-                lstActividad.Text = dataSetGimnasio.Tables[0].Rows[0]["Codigo_Actividad"].ToString();
-                buscarActividad();
-                txtSaldo.Text = dataSetGimnasio.Tables[0].Rows[0]["Saldo"].ToString();
-                dataSetGimnasio.Dispose();
 
-                btnEliminar.Enabled = true;
-                btnModificar.Enabled = true;
 
-                return;
-            }
+            conexion.Close();
+
+
         }
 
         private void buscarBarrio()
         {
             string barrio = lstBarrio.Text;
 
-            conexion.ConnectionString = ruta;
+            
             string cadenaBarrio = "Select * From Tabla_Barrio";
 
-            conexion.Open();
+            
             OleDbCommand commandBarrio = new OleDbCommand(cadenaBarrio, conexion);
             OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
 
@@ -89,17 +81,16 @@ namespace pryBazanIEFI
                     lstBarrio.Text = Convert.ToString(lectorBarrio["Nombre_Barrio"]);
                 }
             }
-            conexion.Close();
+            
         }
 
         private void buscarActividad()
         {
             string actividad = lstActividad.Text;
 
-            conexion.ConnectionString = ruta;
+            
             string cadenaActividad = "Select * From Actividad";
 
-            conexion.Open();
             OleDbCommand commandActividad = new OleDbCommand(cadenaActividad, conexion);
             OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
 
@@ -110,7 +101,6 @@ namespace pryBazanIEFI
                     lstActividad.Text = Convert.ToString(lectorActividad["Detalle"]);
                 }
             }
-            conexion.Close();
         }
 
         private void agregarListas()
@@ -302,6 +292,13 @@ namespace pryBazanIEFI
             else
             {
                 btnBuscar.Enabled = false;
+                txtNombre.Text = "";
+                txtDireccion.Text = "";
+                lstActividad.Text = "";
+                lstBarrio.Text = "";
+                txtSaldo.Text = "";
+                btnEliminar.Enabled = false;
+                btnModificar.Enabled = false;
             }
         }
     }
