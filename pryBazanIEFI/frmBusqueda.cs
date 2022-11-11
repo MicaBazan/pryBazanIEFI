@@ -30,13 +30,10 @@ namespace pryBazanIEFI
         private void buscar()
         {
             string codigo = txtCodigo.Text;
-
             string cadenaGimnasio = "Select * From Socio";
 
             conexion.ConnectionString = ruta;
-
             conexion.Open();
-
             OleDbCommand command = new OleDbCommand(cadenaGimnasio, conexion);
             OleDbDataReader reader = command.ExecuteReader();
 
@@ -56,21 +53,14 @@ namespace pryBazanIEFI
                     btnModificar.Enabled = true;
                 }  
             }
-
-
             conexion.Close();
-
-
         }
 
         private void buscarBarrio()
         {
             string barrio = lstBarrio.Text;
-
-            
             string cadenaBarrio = "Select * From Tabla_Barrio";
 
-            
             OleDbCommand commandBarrio = new OleDbCommand(cadenaBarrio, conexion);
             OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
 
@@ -80,15 +70,12 @@ namespace pryBazanIEFI
                 {
                     lstBarrio.Text = Convert.ToString(lectorBarrio["Nombre_Barrio"]);
                 }
-            }
-            
+            }            
         }
 
         private void buscarActividad()
         {
             string actividad = lstActividad.Text;
-
-            
             string cadenaActividad = "Select * From Actividad";
 
             OleDbCommand commandActividad = new OleDbCommand(cadenaActividad, conexion);
@@ -246,7 +233,6 @@ namespace pryBazanIEFI
                 command.Connection.Close();
 
                 MessageBox.Show("Registro Actualizado Existosamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               
             }
             catch(Exception ex)
             {
