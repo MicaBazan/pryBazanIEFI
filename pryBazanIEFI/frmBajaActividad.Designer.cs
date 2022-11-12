@@ -87,11 +87,13 @@
             // 
             // lstActividad
             // 
+            this.lstActividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstActividad.FormattingEnabled = true;
             this.lstActividad.Location = new System.Drawing.Point(108, 48);
             this.lstActividad.Name = "lstActividad";
             this.lstActividad.Size = new System.Drawing.Size(164, 28);
             this.lstActividad.TabIndex = 1;
+            this.lstActividad.TextChanged += new System.EventHandler(this.lstActividad_TextChanged);
             // 
             // lblNombre
             // 
@@ -115,6 +117,7 @@
             this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // frmBajaActividad
             // 
@@ -127,6 +130,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmBajaActividad";
             this.Text = "frmBajaActividad";
+            this.Load += new System.EventHandler(this.frmBajaActividad_Load);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picCerrar)).EndInit();

@@ -247,7 +247,7 @@ namespace pryBazanIEFI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            String codigo = txtCodigo.Text;
+            string codigo = txtCodigo.Text;
 
             OleDbConnection conexion = new OleDbConnection(ruta);
             string delete = "DELETE FROM Socio WHERE Dni_Socio=" + codigo;

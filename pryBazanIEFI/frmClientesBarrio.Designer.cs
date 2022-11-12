@@ -88,6 +88,7 @@
             this.lstBarrio.Name = "lstBarrio";
             this.lstBarrio.Size = new System.Drawing.Size(452, 24);
             this.lstBarrio.TabIndex = 2;
+            this.lstBarrio.TextChanged += new System.EventHandler(this.lstBarrio_TextChanged);
             // 
             // dgvClientes
             // 

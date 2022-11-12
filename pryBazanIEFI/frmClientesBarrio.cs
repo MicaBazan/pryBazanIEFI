@@ -76,11 +76,24 @@ namespace pryBazanIEFI
         {
             listarBarrio();
             lstBarrio.SelectedIndex = -1;
+            btnListar.Enabled = false;
         }
 
         private void picCerrar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void lstBarrio_TextChanged(object sender, EventArgs e)
+        {
+            if(lstBarrio.Text != string.Empty)
+            {
+                btnListar.Enabled = true;
+            }
+            else
+            {
+                btnListar.Enabled = false;
+            }
         }
     }
 }

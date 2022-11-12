@@ -53,6 +53,7 @@
             this.btnEliminar.TabIndex = 11;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // gbBarrio
             // 
@@ -68,11 +69,13 @@
             // 
             // lstBarrio
             // 
+            this.lstBarrio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstBarrio.FormattingEnabled = true;
             this.lstBarrio.Location = new System.Drawing.Point(108, 48);
             this.lstBarrio.Name = "lstBarrio";
             this.lstBarrio.Size = new System.Drawing.Size(164, 28);
             this.lstBarrio.TabIndex = 1;
+            this.lstBarrio.TextChanged += new System.EventHandler(this.lstBarrio_TextChanged);
             // 
             // lblNombre
             // 
@@ -127,6 +130,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmBajaBarrio";
             this.Text = "frmBajaBarrio";
+            this.Load += new System.EventHandler(this.frmBajaBarrio_Load);
             this.gbBarrio.ResumeLayout(false);
             this.gbBarrio.PerformLayout();
             this.pnlMenu.ResumeLayout(false);
