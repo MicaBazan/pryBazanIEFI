@@ -58,6 +58,18 @@
     <Compile Include="frmAgregarCliente.Designer.cs">
       <DependentUpon>frmAgregarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBajaActividad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBajaActividad.Designer.cs">
+      <DependentUpon>frmBajaActividad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBajaBarrio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBajaBarrio.Designer.cs">
+      <DependentUpon>frmBajaBarrio.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBusqueda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,16 +106,46 @@
     <Compile Include="frmConsultaUnCliente.Designer.cs">
       <DependentUpon>frmConsultaUnCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
+    <Compile Include="frmIngreso.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="frmIngreso.Designer.cs">
+      <DependentUpon>frmIngreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgregarActividad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAgregarActividad.Designer.cs">
+      <DependentUpon>frmAgregarActividad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgregarBarrio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAgregarBarrio.Designer.cs">
+      <DependentUpon>frmAgregarBarrio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAgregarActividad.resx">
+      <DependentUpon>frmAgregarActividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAgregarBarrio.resx">
+      <DependentUpon>frmAgregarBarrio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarCliente.resx">
       <DependentUpon>frmAgregarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBajaActividad.resx">
+      <DependentUpon>frmBajaActividad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBajaBarrio.resx">
+      <DependentUpon>frmBajaBarrio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBusqueda.resx">
       <DependentUpon>frmBusqueda.cs</DependentUpon>
@@ -123,8 +165,11 @@
     <EmbeddedResource Include="frmConsultaUnCliente.resx">
       <DependentUpon>frmConsultaUnCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmIngreso.resx">
+      <DependentUpon>frmIngreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -155,6 +200,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imagenes\fondo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\ico_Socio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\socio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

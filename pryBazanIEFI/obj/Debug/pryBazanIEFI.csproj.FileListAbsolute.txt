@@ -46,7 +46,6 @@ C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frm
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmClientesSaldo.resources
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmClientesTotal.resources
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmConsultaUnCliente.resources
-C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmMain.resources
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.Properties.Resources.resources
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csproj.GenerateResource.cache
 C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csproj.CoreCompileInputs.cache
@@ -104,3 +103,9 @@ C:\Users\Alumnos\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.c
 C:\Users\Alumnos\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csproj.CopyComplete
 C:\Users\Alumnos\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.exe
 C:\Users\Alumnos\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.pdb
+C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmIngreso.resources
+C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmPrincipal.resources
+C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmAgregarBarrio.resources
+C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmAgregarActividad.resources
+C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmBajaActividad.resources
+C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmBajaBarrio.resources
