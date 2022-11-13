@@ -42,6 +42,7 @@ namespace pryBazanIEFI
             }
             else
             {
+                //Inicializa una nueva instancia de la clase OleDbCommand con el texto de la consulta y una OleDbConnection.
                 OleDbCommand cmd = new OleDbCommand(insert, conexion);
                 cmd.Parameters.AddWithValue("@Codigo", codigo);
                 cmd.Parameters.AddWithValue("@Detalle", nombre);
@@ -61,6 +62,8 @@ namespace pryBazanIEFI
             conexion.ConnectionString = ruta;
 
             string selectCodigo = "SELECT Codigo_Actividad FROM Actividad";
+
+            //Inicializa una nueva instancia de la clase OleDbCommand con el texto de la consulta y una OleDbConnection.
             OleDbCommand cmdCodigo = new OleDbCommand(selectCodigo, conexion);
 
             conexion.Open();
