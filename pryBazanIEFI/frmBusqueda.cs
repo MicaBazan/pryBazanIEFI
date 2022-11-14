@@ -51,7 +51,13 @@ namespace pryBazanIEFI
 
                     btnEliminar.Enabled = true;
                     btnModificar.Enabled = true;
-                }  
+                }
+                else
+                {
+                    MessageBox.Show("El DNI ingresado no se encuentra registrado", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCodigo.Text = "";
+                    return;
+                }
             }
             conexion.Close();
         }

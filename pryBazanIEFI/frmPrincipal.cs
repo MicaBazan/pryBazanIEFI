@@ -62,11 +62,6 @@ namespace pryBazanIEFI
             new frmClientesActividad().ShowDialog();
         }
 
-        private void consultaDeUnClienteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new frmConsultaUnCliente().ShowDialog();
-        }
-
         private void agregarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             new frmAgregarBarrio().ShowDialog();
@@ -87,14 +82,14 @@ namespace pryBazanIEFI
             new frmBajaActividad().ShowDialog();
         }
 
-        private void modificarToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void listadoDeClientesDeudoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            new frmClientesDeudores().ShowDialog();
         }
 
-        private void modificarToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void consultaDeUnClienteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            
+            new frmConsultaUnCliente().ShowDialog();
         }
     }
 }
