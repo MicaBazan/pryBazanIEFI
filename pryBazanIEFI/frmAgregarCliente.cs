@@ -16,7 +16,7 @@ namespace pryBazanIEFI
     public partial class frmAgregarCliente : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
-        int[] vecDni = new int[100];
+        int[] vecDni = new int[1000];
         OleDbConnection conexion = new OleDbConnection();
         public frmAgregarCliente()
         {

@@ -95,7 +95,7 @@ namespace pryBazanIEFI
 
 
                 //Total saldos
-                int[] vecSaldo = new int[50];
+                int[] vecSaldo = new int[1000];
                 int indice = 0;
 
                 string selectSaldo = "SELECT Saldo FROM Socio WHERE Codigo_Actividad=" + codActividad;
@@ -115,7 +115,7 @@ namespace pryBazanIEFI
 
                 //Busca Mayor y Menor
                 indice = 0;
-                while(indice <= 49)    
+                while(indice <= 999)    
                 {
                     if (vecSaldo[indice] > mayor)
                     {
