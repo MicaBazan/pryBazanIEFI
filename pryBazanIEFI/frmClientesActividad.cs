@@ -17,8 +17,6 @@ using iTextSharp.text;
 using Font = System.Drawing.Font;
 
 //Instale iTextSharp para poder exportar a un pdf
-//Buscar bien que es iTextSharp
-//Y estudiar código imprimir y exportar
 
 
 namespace pryBazanIEFI
@@ -161,48 +159,75 @@ namespace pryBazanIEFI
 
 
 
-        //ESTUDIAR CÓDIGO
         private void btnImprimir_Click(object sender, EventArgs e)
         {
+            //Para establecer las propiedades que describen lo que desea imprimir 
             PrintDocument doc = new PrintDocument();
+
+            //DefaultPageSetting: especifica la configuracion de pagina predeterminada para el documento
+            //Landscape: Para que se imprima horizontal
             doc.DefaultPageSettings.Landscape = true;
+
+            //PrinterSettings: donde y como se imprime el documento
+            //PrinterName: Nombre de la impresora que se va a utilizar
             doc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
 
+            //PrintPreviewDialog: cuadro de diálogo preconfigurado que se utiliza para mostrar cómo aparecerá un PrintDocument cuando se imprima
+            //Muestra el documento antes de imprimir
             PrintPreviewDialog ppd = new PrintPreviewDialog { Document = doc};
+
+            //el cuadro de dialogo se va a abrir de forma maximizada
             ((Form)ppd).WindowState = FormWindowState.Maximized;
 
+            //PrintPage: Especifica información sobre cómo se imprime un documento
+            //+= : se produce cuando se necesita el resultado que se va a imprimir
             doc.PrintPage += delegate (object ev, PrintPageEventArgs ep)
             {
-                const int DGV_ALTO = 35;
+                //Alto de cada casilla
+                const int DGV_ALTO = 40;
+                //variable para la coordenada del borde izquierdo y borde superior
                 int left = ep.MarginBounds.Left, top = ep.MarginBounds.Top;
 
+
+                //Para cada columna de la grilla
                 foreach(DataGridViewColumn col in dgvClientes.Columns)
                 {
+                    //Graphics: se utiliza para dibujar en la pagina
+                    //DrawString: Dibuja la cadena de texto especificada en la ubicación especificada y con los objetos Brush y Font especificados.
+                    //Font: Define un formato concreto para el texto
+                    //Brushes: determina el color y la textura del texto
                     ep.Graphics.DrawString(col.HeaderText, new Font("Segoe UI", 16, FontStyle.Bold), Brushes.DeepSkyBlue, left, top);
                     left += col.Width;
                 }
+                //MarginBounds: Obtiene el area rectangular que representa la parte de la pagina comprendida entre los margenes
                 left = ep.MarginBounds.Left;
+                //FillRectangle: Rellena el interior de un rectangulo por un par de coordenadas, un valor de ancho y uno de alto
                 ep.Graphics.FillRectangle(Brushes.Black, left, top+40, ep.MarginBounds.Right - left, 3);
                 top += 43;
 
+                //Para cada fila de la grilla
                 foreach (DataGridViewRow row in dgvClientes.Rows)
                 {
                     left = ep.MarginBounds.Left;
+
+                    //para cada fila y celda de la grilla
                     foreach (DataGridViewCell cell in row.Cells)
                     {
                         ep.Graphics.DrawString(Convert.ToString(cell.Value), new Font("Segoe UI", 13), Brushes.Black, left, top + 4);
                         left += cell.OwningColumn.Width;
                     }
+
+                    //Deja un espacio de 40
                     top += DGV_ALTO;
                }
             };
 
+            //Abre el doc en una nueva ventana
             ppd.ShowDialog();
         }
 
 
 
-        //ESTUDIAR CÓDIGO
         private void btnExportar_Click(object sender, EventArgs e)
         {
             if(dgvClientes.Rows.Count > 0)

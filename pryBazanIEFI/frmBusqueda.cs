@@ -15,7 +15,7 @@ namespace pryBazanIEFI
     public partial class frmBusqueda : Form
     {
         string ruta = "Provider=Microsoft.ACE.OLEDB.12.0; Data Source=BD_Clientes.accdb";
-        OleDbConnection conexion = new OleDbConnection();
+        
 
         public frmBusqueda()
         {
@@ -32,7 +32,7 @@ namespace pryBazanIEFI
             string codigo = txtCodigo.Text;
             string cadenaGimnasio = "Select * From Socio";
 
-            conexion.ConnectionString = ruta;
+            OleDbConnection conexion = new OleDbConnection(ruta);
             conexion.Open();
             OleDbCommand command = new OleDbCommand(cadenaGimnasio, conexion);
             OleDbDataReader reader = command.ExecuteReader();
@@ -52,12 +52,6 @@ namespace pryBazanIEFI
                     btnEliminar.Enabled = true;
                     btnModificar.Enabled = true;
                 }
-                else
-                {
-                    MessageBox.Show("El DNI ingresado no se encuentra registrado", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtCodigo.Text = "";
-                    return;
-                }
             }
             conexion.Close();
         }
@@ -67,8 +61,13 @@ namespace pryBazanIEFI
             string barrio = lstBarrio.Text;
             string cadenaBarrio = "Select * From Tabla_Barrio";
 
+            OleDbConnection conexion = new OleDbConnection(ruta);
+
             OleDbCommand commandBarrio = new OleDbCommand(cadenaBarrio, conexion);
+            conexion.Open();
             OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
+
+            
 
             while(lectorBarrio.Read())
             {
@@ -76,7 +75,9 @@ namespace pryBazanIEFI
                 {
                     lstBarrio.Text = Convert.ToString(lectorBarrio["Nombre_Barrio"]);
                 }
-            }            
+            }
+
+            conexion.Close();
         }
 
         private void buscarActividad()
@@ -84,7 +85,10 @@ namespace pryBazanIEFI
             string actividad = lstActividad.Text;
             string cadenaActividad = "Select * From Actividad";
 
+            OleDbConnection conexion = new OleDbConnection(ruta);
+
             OleDbCommand commandActividad = new OleDbCommand(cadenaActividad, conexion);
+            conexion.Open();
             OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
 
             while (lectorActividad.Read())
@@ -94,11 +98,13 @@ namespace pryBazanIEFI
                     lstActividad.Text = Convert.ToString(lectorActividad["Detalle"]);
                 }
             }
+
+            conexion.Close();
         }
 
         private void agregarListas()
         {
-            conexion.ConnectionString = ruta;
+            OleDbConnection conexion = new OleDbConnection(ruta);
             conexion.Open();
 
             //Agregar listas barrio
@@ -191,7 +197,7 @@ namespace pryBazanIEFI
             string actividad = lstActividad.Text;
             string saldo = txtSaldo.Text;
 
-            conexion.ConnectionString = ruta;
+            OleDbConnection conexion = new OleDbConnection(ruta);
             string update = "UPDATE Socio SET Nombre_Apellido=@Nombre,Direccion=@Direccion,Codigo_Barrio=@Barrio,Codigo_Actividad=@Actividad,Saldo=@Saldo WHERE Dni_Socio=@Codigo";
 
             try
