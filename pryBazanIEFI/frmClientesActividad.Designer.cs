@@ -57,19 +57,19 @@
             this.pnlMenu.BackColor = System.Drawing.Color.Silver;
             this.pnlMenu.Controls.Add(this.picCerrar);
             this.pnlMenu.Controls.Add(this.lblMenu);
-            this.pnlMenu.Location = new System.Drawing.Point(-4, -6);
-            this.pnlMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlMenu.Location = new System.Drawing.Point(-5, -7);
+            this.pnlMenu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(544, 41);
+            this.pnlMenu.Size = new System.Drawing.Size(725, 50);
             this.pnlMenu.TabIndex = 0;
             // 
             // picCerrar
             // 
             this.picCerrar.Image = global::pryBazanIEFI.Properties.Resources.cerrar;
-            this.picCerrar.Location = new System.Drawing.Point(435, 13);
-            this.picCerrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picCerrar.Location = new System.Drawing.Point(580, 16);
+            this.picCerrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picCerrar.Name = "picCerrar";
-            this.picCerrar.Size = new System.Drawing.Size(22, 18);
+            this.picCerrar.Size = new System.Drawing.Size(29, 22);
             this.picCerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCerrar.TabIndex = 2;
             this.picCerrar.TabStop = false;
@@ -79,20 +79,18 @@
             // 
             this.lblMenu.AutoSize = true;
             this.lblMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMenu.Location = new System.Drawing.Point(14, 13);
-            this.lblMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMenu.Location = new System.Drawing.Point(19, 16);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(250, 18);
+            this.lblMenu.Size = new System.Drawing.Size(299, 22);
             this.lblMenu.TabIndex = 1;
             this.lblMenu.Text = "Listado de clientes por actividad";
             // 
             // lblActividad
             // 
             this.lblActividad.AutoSize = true;
-            this.lblActividad.Location = new System.Drawing.Point(10, 54);
-            this.lblActividad.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblActividad.Location = new System.Drawing.Point(13, 66);
             this.lblActividad.Name = "lblActividad";
-            this.lblActividad.Size = new System.Drawing.Size(51, 13);
+            this.lblActividad.Size = new System.Drawing.Size(63, 16);
             this.lblActividad.TabIndex = 1;
             this.lblActividad.Text = "Actividad";
             // 
@@ -100,10 +98,10 @@
             // 
             this.lstActividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lstActividad.FormattingEnabled = true;
-            this.lstActividad.Location = new System.Drawing.Point(69, 51);
-            this.lstActividad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstActividad.Location = new System.Drawing.Point(92, 63);
+            this.lstActividad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstActividad.Name = "lstActividad";
-            this.lstActividad.Size = new System.Drawing.Size(270, 21);
+            this.lstActividad.Size = new System.Drawing.Size(359, 24);
             this.lstActividad.TabIndex = 2;
             this.lstActividad.TextChanged += new System.EventHandler(this.lstActividad_TextChanged);
             // 
@@ -112,51 +110,47 @@
             this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(12, 89);
-            this.dgvClientes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvClientes.Location = new System.Drawing.Point(16, 110);
+            this.dgvClientes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.RowTemplate.Height = 24;
-            this.dgvClientes.Size = new System.Drawing.Size(326, 152);
+            this.dgvClientes.Size = new System.Drawing.Size(435, 187);
             this.dgvClientes.TabIndex = 3;
             // 
             // lblMayorSaldo
             // 
             this.lblMayorSaldo.AutoSize = true;
-            this.lblMayorSaldo.Location = new System.Drawing.Point(20, 33);
-            this.lblMayorSaldo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMayorSaldo.Location = new System.Drawing.Point(27, 41);
             this.lblMayorSaldo.Name = "lblMayorSaldo";
-            this.lblMayorSaldo.Size = new System.Drawing.Size(36, 13);
+            this.lblMayorSaldo.Size = new System.Drawing.Size(45, 16);
             this.lblMayorSaldo.TabIndex = 4;
             this.lblMayorSaldo.Text = "Mayor";
             // 
             // lblPromedioSaldo
             // 
             this.lblPromedioSaldo.AutoSize = true;
-            this.lblPromedioSaldo.Location = new System.Drawing.Point(20, 91);
-            this.lblPromedioSaldo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPromedioSaldo.Location = new System.Drawing.Point(27, 112);
             this.lblPromedioSaldo.Name = "lblPromedioSaldo";
-            this.lblPromedioSaldo.Size = new System.Drawing.Size(51, 13);
+            this.lblPromedioSaldo.Size = new System.Drawing.Size(66, 16);
             this.lblPromedioSaldo.TabIndex = 5;
             this.lblPromedioSaldo.Text = "Promedio";
             // 
             // lblMayor
             // 
             this.lblMayor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMayor.Location = new System.Drawing.Point(88, 32);
-            this.lblMayor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMayor.Location = new System.Drawing.Point(117, 39);
             this.lblMayor.Name = "lblMayor";
-            this.lblMayor.Size = new System.Drawing.Size(100, 26);
+            this.lblMayor.Size = new System.Drawing.Size(133, 32);
             this.lblMayor.TabIndex = 6;
             // 
             // lblMenorSaldo
             // 
             this.lblMenorSaldo.AutoSize = true;
-            this.lblMenorSaldo.Location = new System.Drawing.Point(242, 33);
-            this.lblMenorSaldo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMenorSaldo.Location = new System.Drawing.Point(323, 41);
             this.lblMenorSaldo.Name = "lblMenorSaldo";
-            this.lblMenorSaldo.Size = new System.Drawing.Size(37, 13);
+            this.lblMenorSaldo.Size = new System.Drawing.Size(45, 16);
             this.lblMenorSaldo.TabIndex = 9;
             this.lblMenorSaldo.Text = "Menor";
             // 
@@ -166,10 +160,10 @@
             this.btnListar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListar.ForeColor = System.Drawing.Color.White;
-            this.btnListar.Location = new System.Drawing.Point(354, 51);
-            this.btnListar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnListar.Location = new System.Drawing.Point(472, 63);
+            this.btnListar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnListar.Name = "btnListar";
-            this.btnListar.Size = new System.Drawing.Size(97, 49);
+            this.btnListar.Size = new System.Drawing.Size(129, 60);
             this.btnListar.TabIndex = 2;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = false;
@@ -181,10 +175,10 @@
             this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimir.ForeColor = System.Drawing.Color.White;
-            this.btnImprimir.Location = new System.Drawing.Point(354, 119);
-            this.btnImprimir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnImprimir.Location = new System.Drawing.Point(472, 146);
+            this.btnImprimir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(97, 49);
+            this.btnImprimir.Size = new System.Drawing.Size(129, 60);
             this.btnImprimir.TabIndex = 10;
             this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.UseVisualStyleBackColor = false;
@@ -196,10 +190,10 @@
             this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportar.ForeColor = System.Drawing.Color.White;
-            this.btnExportar.Location = new System.Drawing.Point(354, 192);
-            this.btnExportar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExportar.Location = new System.Drawing.Point(472, 237);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(97, 49);
+            this.btnExportar.Size = new System.Drawing.Size(129, 60);
             this.btnExportar.TabIndex = 11;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.UseVisualStyleBackColor = false;
@@ -215,11 +209,11 @@
             this.gbEtiquetas.Controls.Add(this.lblMayorSaldo);
             this.gbEtiquetas.Controls.Add(this.lblPromedioSaldo);
             this.gbEtiquetas.Controls.Add(this.lblMenorSaldo);
-            this.gbEtiquetas.Location = new System.Drawing.Point(12, 262);
-            this.gbEtiquetas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbEtiquetas.Location = new System.Drawing.Point(16, 322);
+            this.gbEtiquetas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbEtiquetas.Name = "gbEtiquetas";
-            this.gbEtiquetas.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gbEtiquetas.Size = new System.Drawing.Size(439, 141);
+            this.gbEtiquetas.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbEtiquetas.Size = new System.Drawing.Size(585, 174);
             this.gbEtiquetas.TabIndex = 12;
             this.gbEtiquetas.TabStop = false;
             this.gbEtiquetas.Text = "Datos";
@@ -227,45 +221,41 @@
             // lblTotal
             // 
             this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTotal.Location = new System.Drawing.Point(311, 90);
-            this.lblTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotal.Location = new System.Drawing.Point(415, 111);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(100, 26);
+            this.lblTotal.Size = new System.Drawing.Size(133, 32);
             this.lblTotal.TabIndex = 13;
             // 
             // lblPromedio
             // 
             this.lblPromedio.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblPromedio.Location = new System.Drawing.Point(88, 90);
-            this.lblPromedio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPromedio.Location = new System.Drawing.Point(117, 111);
             this.lblPromedio.Name = "lblPromedio";
-            this.lblPromedio.Size = new System.Drawing.Size(100, 26);
+            this.lblPromedio.Size = new System.Drawing.Size(133, 32);
             this.lblPromedio.TabIndex = 12;
             // 
             // lblMenor
             // 
             this.lblMenor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMenor.Location = new System.Drawing.Point(311, 32);
-            this.lblMenor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMenor.Location = new System.Drawing.Point(415, 39);
             this.lblMenor.Name = "lblMenor";
-            this.lblMenor.Size = new System.Drawing.Size(100, 26);
+            this.lblMenor.Size = new System.Drawing.Size(133, 32);
             this.lblMenor.TabIndex = 11;
             // 
             // lblTotalSaldo
             // 
             this.lblTotalSaldo.AutoSize = true;
-            this.lblTotalSaldo.Location = new System.Drawing.Point(242, 91);
-            this.lblTotalSaldo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalSaldo.Location = new System.Drawing.Point(323, 112);
             this.lblTotalSaldo.Name = "lblTotalSaldo";
-            this.lblTotalSaldo.Size = new System.Drawing.Size(61, 13);
+            this.lblTotalSaldo.Size = new System.Drawing.Size(77, 16);
             this.lblTotalSaldo.TabIndex = 10;
             this.lblTotalSaldo.Text = "Total Saldo";
             // 
             // frmClientesActividad
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 418);
+            this.ClientSize = new System.Drawing.Size(618, 514);
             this.Controls.Add(this.gbEtiquetas);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.btnImprimir);
@@ -275,7 +265,7 @@
             this.Controls.Add(this.lblActividad);
             this.Controls.Add(this.pnlMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmClientesActividad";
             this.Text = "frmClientesActividad";
             this.Load += new System.EventHandler(this.frmClientesActividad_Load);

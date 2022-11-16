@@ -110,3 +110,4 @@ C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frm
 C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmBajaActividad.resources
 C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmBajaBarrio.resources
 C:\Users\marti\source\repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.frmClientesDeudores.resources
+C:\Users\marti\Source\Repos\pryBazanIEFI\pryBazanIEFI\obj\Debug\pryBazanIEFI.csproj.ResolveComReference.cache

@@ -11,12 +11,6 @@ using System.Windows.Forms;
 //Para imprimir
 using System.Drawing.Printing;
 using System.IO;
-//Para exportar
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using Font = System.Drawing.Font;
-
-//Instale iTextSharp para poder exportar a un pdf
 
 
 namespace pryBazanIEFI
@@ -157,8 +151,6 @@ namespace pryBazanIEFI
             Close();
         }
 
-
-
         private void btnImprimir_Click(object sender, EventArgs e)
         {
             //Para establecer las propiedades que describen lo que desea imprimir 
@@ -226,92 +218,57 @@ namespace pryBazanIEFI
             ppd.ShowDialog();
         }
 
-
-
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            if(dgvClientes.Rows.Count > 0)
-            {
-                SaveFileDialog save = new SaveFileDialog();
-
-                save.Filter = "PDF (*.pdf)|*.pdf";
-
-                save.FileName = "ActividadCliente.pdf";
-
-                bool ErrorMessage = false;
-
-                if(save.ShowDialog() == DialogResult.OK)
-                {
-                    if(File.Exists(save.FileName))
-                    {
-                        try
-                        {
-                            File.Delete(save.FileName);
-                        }
-                        catch(Exception ex)
-                        {
-                            ErrorMessage = true;
-                            MessageBox.Show("No se pueden escribir datos en el disco" + ex.Message);
-                        }
-                    }
-
-                    if(!ErrorMessage)
-                    {
-                        try
-                        {
-                            PdfPTable pTable = new PdfPTable(dgvClientes.Columns.Count);
-
-                            pTable.DefaultCell.Padding = 2;
-
-                            pTable.WidthPercentage = 100;
-
-                            pTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
-                            foreach(DataGridViewColumn col in dgvClientes.Columns)
-                            {
-                                PdfPCell pCell = new PdfPCell(new Phrase(col.HeaderText));
-
-                                pTable.AddCell(pCell);
-                            }
-
-                            foreach(DataGridViewRow viewRow in dgvClientes.Rows)
-                            {
-                                foreach (DataGridViewCell dcell in viewRow.Cells)
-                                {
-                                    pTable.AddCell(dcell.Value.ToString());
-                                }
-                            }
-
-                            using (FileStream fileStream = new FileStream(save.FileName, FileMode.Create))
-                            {
-                                Document document = new Document(PageSize.A4, 8f, 16f, 16f, 8f);
-
-                                PdfWriter.GetInstance(document, fileStream);
-
-                                document.Open();
-
-                                document.Add(pTable);
-
-                                document.Close();
-
-                                fileStream.Close();
-                            }
-
-                            MessageBox.Show("Exportación de datos con éxito", "Aviso");
-                        }
-                        catch(Exception ex)
-                        {
-                            MessageBox.Show("Error while exporting Data" + ex.Message);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No Record Found", "Info");
-                }
-            }
+            reporteExcel(dgvClientes);
         }
 
+        private void reporteExcel(DataGridView grillaActividad)
+        {
+            Microsoft.Office.Interop.Excel.Application exportarExcel = new Microsoft.Office.Interop.Excel.Application();
+
+            //Es de cir a exportar excel le estamos indicando que vamos a crear un nuevo libro y le estamos diciendo que es verdadero
+            exportarExcel.Application.Workbooks.Add(true);
+
+            //Vamos a leer las columnas de la grilla
+            int indiceColumna = 0;
+
+
+            //Primero se van a leer las columnas
+            foreach (DataGridViewColumn columna in grillaActividad.Columns)
+            {
+                //se va a ir incrementando a medida que lee las columnas
+                indiceColumna++;
+
+                //Se va a ir rellenando las celdas de nuestra grilla
+                //Y esto va a ser igual al nombre de nuestra columna
+                exportarExcel.Cells[1, indiceColumna] = columna.Name;
+            }
+
+            int indiceFila = 0;
+
+
+            //Luego vamos a leer las filas
+            foreach (DataGridViewRow filas in grillaActividad.Rows)
+            {
+                indiceFila++;
+                //Una vez que lee todas las filas de esa columna
+                //Vuelva a la siguiente columna empezando desde 0
+                indiceColumna = 0;
+
+                foreach (DataGridViewColumn columna in grillaActividad.Columns)
+                {
+                    indiceColumna++;
+
+                    //Primero el indice fila va a ir aumentando uno en uno en la columna correspondiente
+                    //se encia el nombre de las columnas
+                    exportarExcel.Cells[indiceFila + 1, indiceColumna] = filas.Cells[columna.Name].Value;
+                }
+            }
+
+            //se va a mostrar el excel
+            exportarExcel.Visible = true;
+        }
         private void lstActividad_TextChanged(object sender, EventArgs e)
         {
             if (lstActividad.Text != string.Empty)
