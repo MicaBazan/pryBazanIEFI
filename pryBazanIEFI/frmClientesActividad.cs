@@ -65,7 +65,7 @@ namespace pryBazanIEFI
             try
             {
                 //Buscar código actividad
-                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
+                string selectactividad = "SELECT * FROM Actividad";
 
                 OleDbCommand commandActividad = new OleDbCommand(selectactividad, conexion);
                 OleDbDataReader lectorActividad = commandActividad.ExecuteReader();

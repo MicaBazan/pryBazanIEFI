@@ -75,7 +75,7 @@ namespace pryBazanIEFI
                 cmd.Parameters.AddWithValue("@Direccion", direccion);
 
                 //Buscar código barrio
-                string selectBarrio = "Select * From Tabla_Barrio Where Nombre_Barrio='" + barrio + "'";
+                string selectBarrio = "Select * From Tabla_Barrio";
 
                 OleDbCommand commandBarrio = new OleDbCommand(selectBarrio, conexion);
                 OleDbDataReader lectorBarrio = commandBarrio.ExecuteReader();
@@ -89,7 +89,7 @@ namespace pryBazanIEFI
                 }
 
                 //Buscar código actividad
-                string selectactividad = "SELECT * FROM Actividad WHERE Detalle='" + actividad + "'";
+                string selectactividad = "SELECT * FROM Actividad";
 
                 OleDbCommand commandActividad = new OleDbCommand(selectactividad, conexion);
                 OleDbDataReader lectorActividad = commandActividad.ExecuteReader();
